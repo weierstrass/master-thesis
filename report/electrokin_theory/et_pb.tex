@@ -60,9 +60,31 @@ n_i^{\infty} \exp\left(-\frac{z_i q_e \psi(x)}{k_BT}\right).
 \end{equation}
 
 \subsection{The Debye–Hückel approximation}
-In the early days of the study of ion solutions the non-linear nature
-of eq. \eqref{eq:pb_real} complicated for the ones trying to solve
-it. A linearisation was usually the way to go.
+The non-linear nature of eq. \eqref{eq:pb_real} complicates when it
+comes to solving it. Especially in the past when the computational power
+at hands were rather limited. A linearisation is therefore sometimes
+done, this linear version of the PB equation is often referred to as
+the Debye–Hückel approximation. In this work, when it comes to the
+solving the PB equation, the full non-linear version will be
+considered. The solution of the linearisation gives however, something
+to compare with and will be used when defining a characteristic length
+scale of the EDL.
+
+For a 1:1 electrolyte solution, eq. \eqref{eq:pb_real} reduces to
+
+\begin{equation}
+\frac{d^2\psi(x)}{dx^2} = \frac{2n^{\infty}q_ez}{\epsilon_r
+  \epsilon_0}
+\sinh\left(\frac{z q_e \psi(x)}{k_BT}\right).
+\end{equation}
+and the linearised equation is
+
+\begin{equation}
+\frac{d^2\psi(x)}{dx^2} = \frac{2n^{\infty}q_e^2z^2}{\epsilon_r
+  \epsilon_0 k_B T} \psi(x) = \kappa^2 \psi(x)
+\end{equation}
+where $\kappa^{-1}$ is the Debye length and gives a measure for the
+characteristic size of the EDL.
 
 \subsection{Limitations of the Poisson-Boltzmann model}
 From the derivation of the Poisson-Boltzmann equation above, two main
