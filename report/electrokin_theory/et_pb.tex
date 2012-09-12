@@ -1,7 +1,96 @@
-\section{Poisson-Boltzmann model}
+\section{Poisson-Boltzmann equation}
+A simple and commonly used approach for determining potentials (and
+charge distributions) in systems with present EDLs is by solving
+eq. \eqref{eq:pb} with a charge distribution of Boltzmann
+type. Here follows a brief derivation of this term together with some
+discussion on the assumptions made.
+
+The fundamental assumption that the derivation of the charge
+distribution is based on, is the fact that the system is assumed to be
+under thermodynamical equilibrium. I.e. forces, acting on the ions,
+due to chemical diffusion from concentration gradients and from the
+electrical field are therefore balancing each other. In one dimension:
+
+\begin{equation}\label{eq:dif_elec_forces}
+\frac{d \mu_i}{dx} = -z_i q_e\frac{d\psi}{dx}
+\end{equation}
+where $\mu_i$ is the chemical potential for species $i$, $z_i$ is the
+relative charge of species $i$, $q_e$ the fundamental charge and
+$\psi$ is the EDL potential. The chemical potential is given by
+\cite{ren}:
+
+\begin{equation}
+\mu_i = \mu_i^{\infty} + k_BT\ln n_i
+\end{equation}
+where $\mu_i^{\infty}$ is a reference value for the chemical potential,
+here the potential value far from the charged wall is used, $k_BT$ is
+the thermal energy and $n_i$ is the ion concentration of species
+$i$. This expression plugged into eq. \eqref{eq:dif_elec_forces} gives
+
+\begin{equation}\label{eq:eq_for_ni}
+\frac{d \ln(n_i)}{dx} = - \frac{z_i q_e}{k_BT}\frac{d \psi}{dx}.
+\end{equation}
+The charge density is determined by solving eq. \eqref{eq:eq_for_ni}
+for $n_i$, i.e. integrating the equation. In order to avoid
+introducing additional unknown quantities, the equation is integrated
+to far away from the wall where the potential from the EDL has
+decreased to zero and where the concentrations, $n_i^{\infty}$,
+of the ions are known.
+
+\begin{equation}
+\int_x^{\infty} d\ln( ni(x')) = -\frac{z q_e}{k_BT}\int_x^{\infty}d\psi(x')
+\end{equation}
+This finally gives an expression for $n_i(x)$:
+
+\begin{equation}\label{eq:ni}
+n_i(x) = n_i^{\infty} \exp\left(-\frac{z_i q_e \psi(x)}{k_BT}\right).
+\end{equation}
+and $\rho_e$ is given by
+
+\begin{equation}\label{eq:rho}
+\rho_e = q_e\sum_i z_i n_i.
+\end{equation}
+
+Summarising eqs. \eqref{eq:pb}, \eqref{eq:ni} and \eqref{eq:rho} gives
+the Poisson-Boltzmann equation in one dimension
+
+\begin{equation}\label{eq:pb_real}
+\frac{d^2\psi(x)}{dx^2} = -\frac{q_e}{\epsilon_r \epsilon_0}\sum_i z_i
+n_i^{\infty} \exp\left(-\frac{z_i q_e \psi(x)}{k_BT}\right).
+\end{equation}
+
+\subsection{The Debye–Hückel approximation}
+In the early days of the study of ion solutions the non-linear nature
+of eq. \eqref{eq:pb_real} complicated for the ones trying to solve
+it. A linearisation was usually the way to go.
+
+\subsection{Limitations of the Poisson-Boltzmann model}
+From the derivation of the Poisson-Boltzmann equation above, two main
+assumptions are made. First the system is considered to be at thermal
+equilibrium. And second the system is assumed to infinitely large. 
+
+In this work, flows of ionic solution will be studied and the
+assumption with thermodynamical equilibrium does not apply. However
+for low-speed flows the model may still be a decent approximation,
+which will be investigated. 
+
+The second assumption, may also stay unfulfilled in some cases
+investigated here. The fluid in contact with the wall must be of
+substantial size in relation to the EDL thickness. There will be
+cases where the choice of $\zeta$ potential in combination with thin
+channels will make this assumption not fulfilled.
+
+Since the PB equation is unable to model the system of
+interest, a different approach will be presented. However, throughout
+this work, references and comparisons with the PB model will be made. 
+
 
 %intro
 
-%liten härledning av högerledet
-
+%liten härledning av högerledet 
+%diffusion by conc grad. = grad of
+%potential <==> termodynamic equilibrium
+%chem pot definerad som....
+% eq.
+% boundary conditions
 %antagaganden !!!
