@@ -1,0 +1,59 @@
+\section{The velocity field - Navier-Stokes equations}
+In hydrodynamics, the Navier-Stokes equations are one of the most
+fundamental corner stones. They describe the motion of a fluid under
+the influence of various internal and external forces. 
+
+For later convenience and for reference when it comes to deriving the
+Lattice-Boltzmann formulation of the NS equation, a brief sketch of a
+derivation will here be presented. A most general form of the
+Navier-Stokes equation follows from momentum conservation
+
+\begin{equation}
+\dfrac{\partial (\rhorm \ubf)}{\partial t} + \nabla \cdot (\rho \ubf
+\otimes \ubf) + \Q = 0 
+\end{equation}
+where, $\rhorm$ is fluid density, $\ubf$ is velocity and $\Q$ is a
+momentum source term (force per volume). Expanding the time
+derivative and the divergence terms respectively gives
+ 
+\begin{equation}\label{eq:et:nspre}
+\ubf \left ( \dfrac{\partial \rhorm}{\partial t} + \nabla \cdot
+  \rhorm \right ) + \rhorm \left (\dfrac{\partial \ubf}{\partial t} +
+  \ubf \cdot \nabla \ubf 
+  \right ) + \Q = 0.
+\end{equation}
+By assuring mass conservation (without sources) we have that
+
+\begin{equation}\label{eq:et:mass_conc}
+ \dfrac{\partial \rhorm}{\partial t} + \nabla \cdot
+  \rhorm = 0
+\end{equation}
+and eq. \eqref{eq:et:nspre} reduces to
+
+\begin{equation}\label{eq:et:ns_general} 
+\rhorm \left (\dfrac{\partial \ubf}{\partial t} +
+  \ubf \cdot \nabla \ubf 
+  \right ) + \Q = 0.
+\end{equation}
+which together with eq. \eqref{eq:et:mass_conc} is a general
+formulation of the Navier stokes equations. 
+
+The force term $\Q$, is determined by the physical properties of the
+fluid and from its environment. In this work, only incompressible
+Newtonian fluids will be studied. The force contribution to $\Q$
+involved in that case is limited to viscous forces, pressure gradients
+in the fluid and to external force fields. Putting that into
+eqs. \eqref{eq:et:mass_conc} and \eqref{eq:et:ns_general} gives
+
+\begin{equation}\label{eq:et:ns_incompressible}
+ \nabla \cdot \rhorm = 0
+\end{equation}
+and
+
+\begin{equation}\label{eq:et:ns_mom}
+\rhorm \left (\dfrac{\partial \ubf}{\partial t} +
+  \ubf \cdot \nabla \ubf 
+  \right ) = - \nabla \Prm  + \mu \nabla^2 \ubf + \F
+\end{equation}
+where $\Prm$ is the pressure, $\mu$ the kinematic viscosity and $\F$
+are the contributions from  external forces.

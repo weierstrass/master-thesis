@@ -1,74 +1,71 @@
-\section{Poisson-Boltzmann equation}
-A simple and commonly used approach for determining potentials (and
-charge distributions) in systems with present EDLs is by solving
-eq. \eqref{eq:pb} with a charge distribution of Boltzmann
-type. Here follows a brief derivation of this term together with some
-discussion on the assumptions made.
+\subsection{Poisson-Boltzmann equation}\label{sec:et:pb}
+Consider a system consisting of an electrolyte in contact with a
+(flat) charged wall.  Under certain assumptions, it is possible to
+explicitly determine the charge density in eq. \eqref{np} as a
+function of the electric potential. E.g. if there is no advection
+present and if the system has reached a steady state, i.e. $\partial
+\C /\partial t = 0$ and $\ubf = \mathbf{0}$ we have:
 
-The fundamental assumption that the derivation of the charge
-distribution is based on, is the fact that the system is assumed to be
-under thermodynamical equilibrium. I.e. forces, acting on the ions,
-due to chemical diffusion from concentration gradients and from the
-electrical field are therefore balancing each other. In one dimension:
+\begin{equation}\label{pb_constant_flux}
+D\nabla \mathrm{C} + \frac{zq_eD}{k_BT}\C\nabla\psirm = \alpha
+\end{equation} 
+where $\alpha$ is some arbitrary constant. Due to the steady state
+assumption, what the equation above actually says is that the net flux
+of charge in the system is constant. Since no flux of charge is wanted
+to flow through the wall boundary, the flux is set to zero on the wall
+and since the flux is constant it will therefore be zero everywhere in
+the liquid, i.e. $\alpha = 0$.
 
-\begin{equation}\label{eq:dif_elec_forces}
-\frac{d \mu_i}{dx} = -z_i q_e\frac{d\psi}{dx}
+Considering only a one-dimensional situation with a position variable
+$y$ varying in a direction out from the wall into the liquid,
+eq. \eqref{pb_constant_flux} reads
+
+\begin{equation}\label{eq:pb_eq_for_C}
+\frac{1}{\C} \dfrac{d \C}{d y} + \frac{zq_e}{k_BT} \dfrac{d \psirm}{d y} = 0
 \end{equation}
-where $\mu_i$ is the chemical potential for species $i$, $z_i$ is the
-relative charge of species $i$, $q_e$ the fundamental charge and
-$\psi$ is the EDL potential. The chemical potential is given by
-\cite{ren}:
+
+The charge density is determined by solving eq. \eqref{eq:pb_eq_for_C}
+for $\C$, i.e. integrating the equation. In order to avoid introducing
+additional unknown quantities, the equation is integrated to far away
+from the wall where the potential from the EDL is assumed to have
+decreased to zero and where the concentrations, $\C^{\infty}$, of the
+electrolyte is known.
 
 \begin{equation}
-\mu_i = \mu_i^{\infty} + k_BT\ln n_i
+\int_y^{\infty} d\ln( \C(y')) = -\frac{z q_e}{k_BT}\int_y^{\infty}d\psirm(y')
 \end{equation}
-where $\mu_i^{\infty}$ is a reference value for the chemical potential,
-here the potential value far from the charged wall is used, $k_BT$ is
-the thermal energy and $n_i$ is the ion concentration of species
-$i$. This expression plugged into eq. \eqref{eq:dif_elec_forces} gives
+This gives an expression for $C(y)$:
 
-\begin{equation}\label{eq:eq_for_ni}
-\frac{d \ln(n_i)}{dx} = - \frac{z_i q_e}{k_BT}\frac{d \psi}{dx}.
+\begin{equation}\label{eq:C}
+\C(y) = \C^{\infty} \exp\left(-\frac{z q_e \psirm(y)}{k_BT}\right).
 \end{equation}
-The charge density is determined by solving eq. \eqref{eq:eq_for_ni}
-for $n_i$, i.e. integrating the equation. In order to avoid
-introducing additional unknown quantities, the equation is integrated
-to far away from the wall where the potential from the EDL has
-decreased to zero and where the concentrations, $n_i^{\infty}$,
-of the ions are known.
 
-\begin{equation}
-\int_x^{\infty} d\ln( ni(x')) = -\frac{z q_e}{k_BT}\int_x^{\infty}d\psi(x')
-\end{equation}
-This finally gives an expression for $n_i(x)$:
-
-\begin{equation}\label{eq:ni}
-n_i(x) = n_i^{\infty} \exp\left(-\frac{z_i q_e \psi(x)}{k_BT}\right).
-\end{equation}
-and $\rho_e$ is given by
+In a general case, there may be several species of ions in the
+electrolyte, the net charge density, $\rho_e$, is then given by simply
+summing up the contributions from the different species:
 
 \begin{equation}\label{eq:rho}
-\rho_e = q_e\sum_i z_i n_i.
+\rho_e = q_e\sum_i z_i \C_i.
 \end{equation}
 
-Summarising eqs. \eqref{eq:pb}, \eqref{eq:ni} and \eqref{eq:rho} gives
+Summarising eqs. \eqref{eq:pb}, \eqref{eq:C} and \eqref{eq:rho} gives
 the Poisson-Boltzmann equation in one dimension
 
 \begin{equation}\label{eq:pb_real}
-\frac{d^2\psi(x)}{dx^2} = -\frac{q_e}{\epsilon_r \epsilon_0}\sum_i z_i
-n_i^{\infty} \exp\left(-\frac{z_i q_e \psi(x)}{k_BT}\right).
+\dfrac{d^2\psirm(y)}{dy^2} = -\frac{q_e}{\epsilon_r \epsilon_0}\sum_i z_i
+\C_i^{\infty} \exp\left(-\frac{z_i q_e \psirm(y)}{k_BT}\right).
 \end{equation}
 
-\subsection{The Debye–Hückel approximation}
-The non-linear nature of eq. \eqref{eq:pb_real} complicates when it
-comes to solving it. Especially in the past when the computational power
-at hands were rather limited. A linearisation is therefore sometimes
-done, this linear version of the PB equation is often referred to as
-the Debye–Hückel approximation. In this work, when it comes to the
-solving the PB equation, the full non-linear version will be
-considered. The solution of the linearisation gives however, something
-to compare with and will be used when defining a characteristic length
-scale of the EDL.
+\subsubsection{The Debye–Hückel approximation}
+Historically, the non-linear nature of eq. \eqref{eq:pb_real}
+complicates when it comes to solving it. This was a major difficulty
+in the past when the computational power at hands were rather
+limited. A linearisation is therefore sometimes done, this linear
+version of the PB equation is often referred to as the Debye–Hückel
+approximation. In this work, when it comes to the solving the PB
+equation, the full non-linear version will be considered. The solution
+of the linearisation gives however, something to compare with and will
+be used when defining a characteristic length scale of the EDL.
 
 For a 1:1 electrolyte solution, eq. \eqref{eq:pb_real} reduces to
 
@@ -86,7 +83,7 @@ and the linearised equation is
 where $\kappa^{-1}$ is the Debye length and gives a measure for the
 characteristic size of the EDL.
 
-\subsection{Limitations of the Poisson-Boltzmann model}
+\subsubsection{Limitations of the Poisson-Boltzmann model}
 From the derivation of the Poisson-Boltzmann equation above, two main
 assumptions are made. First the system is considered to be at thermal
 equilibrium. And second the system is assumed to infinitely large. 
@@ -116,3 +113,36 @@ this work, references and comparisons with the PB model will be made.
 % eq.
 % boundary conditions
 %antagaganden !!!
+
+
+%% A simple and commonly used approach for determining potentials (and
+%% charge distributions) in systems with present EDLs is by solving
+%% eq. \eqref{eq:pb} with a charge distribution of Boltzmann
+%% type. Here follows a brief derivation of this term together with some
+%% discussion on the assumptions made.
+
+%% The fundamental assumption that the derivation of the charge
+%% distribution is based on, is the fact that the system is assumed to be
+%% under thermodynamical equilibrium. I.e. forces, acting on the ions,
+%% due to chemical diffusion from concentration gradients and from the
+%% electrical field are therefore balancing each other. In one dimension:
+
+%% \begin{equation}\label{eq:dif_elec_forces}
+%% \frac{d \mu_i}{dx} = -z_i q_e\frac{d\psi}{dx}
+%% \end{equation}
+%% where $\mu_i$ is the chemical potential for species $i$, $z_i$ is the
+%% relative charge of species $i$, $q_e$ the fundamental charge and
+%% $\psi$ is the EDL potential. The chemical potential is given by
+%% \cite{ren}:
+
+%% \begin{equation}
+%% \mu_i = \mu_i^{\infty} + k_BT\ln n_i
+%% \end{equation}
+%% where $\mu_i^{\infty}$ is a reference value for the chemical potential,
+%% here the potential value far from the charged wall is used, $k_BT$ is
+%% the thermal energy and $n_i$ is the ion concentration of species
+%% $i$. This expression plugged into eq. \eqref{eq:dif_elec_forces} gives
+
+%% \begin{equation}\label{eq:eq_for_ni}
+%% \frac{d \ln(n_i)}{dx} = - \frac{z_i q_e}{k_BT}\frac{d \psi}{dx}.
+%% \end{equation}

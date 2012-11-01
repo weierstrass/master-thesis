@@ -1,42 +1,58 @@
-\section{Electrical double layers}
-Consider an electrically neutral liquid, i.e. a liquid containing the
-same amount of positive and negative ions. When this liquid is
-introduced to, for example, a negatively charged surface, this even
-charge distribution is disturbed in an area close to the surface. Due
-to the introduced electrostatic forces, positive ions will be
-attracted to the surface leaving a positive net charge in the vicinity
-of the surface. It is possible to divide this positively charged
-region in the liquid into two different layers. In the direct vicinity
-of the surface, positive ions will adsorb onto the surface making them
-less mobile than the others in the positively net charged area closer
-to the bulk liquid. The two layers are often referred to as the Stern
-layer (adsorbed) and the diffusive layer (mobile). This is also
-illustrated in fig. \ref{fig:edl_charge} \cite{ren_book}
+\section{Basic concepts of electrokinetic flow}
+Electrohydrodynamics involves the study of electric phenomena on fluid
+flow. How fluids carrying electrical charges (electrolytes) react upon
+external electrical fields or interact with charged objects are
+examples of problems that arise in this field. 
 
-%potential charge general
-The interface between the Stern and the diffusive layer is often
-called the shear plane. Due to the difficulty of measuring the
-potential at the true surface, i.e. the one in contact with the Stern
-layer of the liquid, most models in the field of electrokinetics use
-the shear plane as the boundary for which it exists accurate methods
-to measure the potential \cite{ren_book}. The potential at the shear
-plane will, from heron, be referred to as the $\zeta$-potential.
+\subsection{Electrical double layers}
+As a charged object is brought into contact with an electrolyte it is,
+qualitatively, easily deduced that ions with a sign of charge opposite
+to that of the object will be attracted to the object and ions with
+the same sign of charge will be repelled. These two distinct
+categories of ions will from hereon be referred to as counter- and
+co-ions respectively. In this case, for a neutral electrolyte, a
+surplus of counter-ions will be present in the direct vicinity of the
+object and a surplus of co-ions will be present at some other location
+further from the object.
+ 
+The area with a surplus of counter-ions in an electrolyte in contact
+with a charged object is often referred to as an electrical double
+layer. Two distinct regions will be formed in this area, thus the name 
+double layer. The two layers are often referred to as the Stern
+layer (adsorbed ions) and the diffusive layer (mobile ions). The Stern
+layer is usually several orders of magnitude thinner than the
+diffusive layer and is therefore seldom considered when it comes to
+modelling \cite{donquing-ren}. 
 
-To be able to model the flow dynamics of liquids in a channel with
-present EDLs, the potential and charge distribution in the channel
-must be determined. These quantities are mutually related through
-Poisson's equation for electrostatics:
+\subsection{Electroosmosis}
+As fluid carrying a net charge, e.g. in the diffusive layer of an EDL,
+is under influence of an electric field, the charged particles will
+move due to the electric forces. As the charge particles move, they
+will affect the surrounding liquid, causing it move as well. This
+liquid motion is often referred to as electroosmotic
+flow. \cite{dongquing-ren-book}
 
-\begin{equation}\label{eq:pb}
-\nabla^2\psi = -\frac{\rho_e}{\epsilon_r \epsilon_0}
-\end{equation}
+%% Consider an electrically neutral liquid, i.e. a liquid containing the
+%% same amount of positive and negative ions. When this liquid is
+%% introduced to, for example, a negatively charged surface, this even
+%% charge distribution is disturbed in an area close to the surface. Due
+%% to the introduced electrostatic forces, positive ions will be
+%% attracted to the surface leaving a positive net charge in the vicinity
+%% of the surface. It is possible to divide this positively charged
+%% region in the liquid into two different layers. In the direct vicinity
+%% of the surface, positive ions will adsorb onto the surface making them
+%% less mobile than the others in the positively net charged area closer
+%% to the bulk liquid.  This is also
+%% illustrated in fig. \ref{fig:edl_charge} \cite{ren_book}
 
-where $\psi$ is the electrical potential, $\rho_e$ the electrical
-charge density, $\epsilon_r$ is the relative permittivity and
-$\epsilon_0$ the vacuum permittivity. Under certain assumptions, the
-charge density may be explicitly determined as a function of the
-potential distribution, one such result is the so called
-Poisson-Boltzmann equation.
+%% %potential charge general
+%% The interface between the Stern and the diffusive layer is often
+%% called the shear plane. Due to the difficulty of measuring the
+%% potential at the true surface, i.e. the one in contact with the Stern
+%% layer of the liquid, most models in the field of electrokinetics use
+%% the shear plane as the boundary for which it exists accurate methods
+%% to measure the potential \cite{ren_book}. The potential at the shear
+%% plane will, from heron, be referred to as the $\zeta$-potential.
 
 
 
