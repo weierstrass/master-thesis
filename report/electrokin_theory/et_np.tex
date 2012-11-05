@@ -1,10 +1,10 @@
-\section{The transport of charges - Nernst-Planck equation}
+\section{The transport of charges - Nernst-Planck equation}\label{sec:et:np}
 The charge concentration in an electrolyte is indeed affected by its
 environment. In the model proposed here, influences from: advection of
 the electrolyte, diffusion due to concentration gradients and effects
 from the electric field originating from charged objects placed at the
 border or in the flow is considered. Charge conservation without any
-external sources of the ion density, $\mathrm{C}(\x, t)$ gives:
+external sources of the ion density, $\mathrm{C}(\x, t)$, gives:
 
 \begin{equation}\label{eq:charge_conc}
 \dfrac{\partial \C}{\partial t} + \nabla \cdot \J = 0
@@ -21,7 +21,7 @@ and
 \begin{equation}
 \mathbf{J}_{dif} = -D\nabla \mathrm{C} 
 \end{equation}
-where $\mathbf{u}$ is the advective velocity and $D$ is the diffusion
+where $\mathbf{u}$ is the advective velocity and $D$ is a diffusion
 coefficient. The ionic flux due to the presence of an electric
 potential, $\psirm(\x, t)$, is given by the Nernst equation
 \cite{dongquing-ren-book}:
@@ -30,11 +30,11 @@ potential, $\psirm(\x, t)$, is given by the Nernst equation
 \J_{ele} = -\frac{zq_eD}{k_BT}\C\nabla\psirm
 \end{equation}
 where $z$ is the relative charge of an ion, $q_e$ is the fundamental
-charge, $k_B$ is the Boltzmann constant and $T$ is temperature of the
+charge, $k_B$ is the Boltzmann constant and $T$ is the temperature of the
 fluid.
 
-Summing up the fluxes and putting them into eq. \eqref{eq:charge_conc} gives
-
+Summing up the fluxes and putting them into eq. \eqref{eq:charge_conc}
+gives
 
 \begin{equation}\label{np}
 \dfrac{\partial \C}{\partial t} = \nabla \cdot \left [
@@ -44,17 +44,17 @@ Summing up the fluxes and putting them into eq. \eqref{eq:charge_conc} gives
 which is a known result often referred to as the Nernst-Planck
 equation. The advective velocity, $\ubf$, and the potential gradient,
 $\nabla \psirm$, are obtained from couplings to the Navier-Stokes and
-Poisson's equations respectively. More about the coupling between the
-equations will be discussed in section \ref{et:coupling}.
+Poisson's equation respectively. More about the coupling between the
+equations is discussed in section \ref{sec:et:coupling}.
 
 \subsection{Boundary conditions}
 Depending on the physical situation that is being modelled, different
 conditions may be imposed at the boundaries of the domain. Throughout
-this work, at hard boundaries (walls), the charge flux out of the
-boundary will be set to zero, i.e.:
+this work, at hard boundaries (walls), the charge flux through the
+boundary is set to zero, i.e.:
 
 \begin{equation}
-\J \cdot \mathbf{n}\big|_{x \in \Gamma} = 0 
+\J \cdot \mathbf{n} = 0 \;,\;\; \x \in \Gamma
 \end{equation}
 where $\mathbf{n}$ denotes the normal to the surface and $\Gamma$ is
 the boundary of the domain. 

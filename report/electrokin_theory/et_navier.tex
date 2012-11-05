@@ -1,4 +1,4 @@
-\section{The velocity field - Navier-Stokes equations}
+\section{The velocity field - Navier-Stokes equations}\label{sec:et:ns}
 In hydrodynamics, the Navier-Stokes equations are one of the most
 fundamental corner stones. They describe the motion of a fluid under
 the influence of various internal and external forces. 
@@ -18,22 +18,22 @@ derivative and the divergence terms respectively gives
  
 \begin{equation}\label{eq:et:nspre}
 \ubf \left ( \dfrac{\partial \rhorm}{\partial t} + \nabla \cdot
-  \rhorm \right ) + \rhorm \left (\dfrac{\partial \ubf}{\partial t} +
+  (\rhorm \ubf) \right ) + \rhorm \left (\dfrac{\partial \ubf}{\partial t} +
   \ubf \cdot \nabla \ubf 
   \right ) + \Q = 0.
 \end{equation}
 By assuring mass conservation (without sources) we have that
 
 \begin{equation}\label{eq:et:mass_conc}
- \dfrac{\partial \rhorm}{\partial t} + \nabla \cdot
-  \rhorm = 0
+ \dfrac{\partial \rhorm}{\partial t} + \nabla \cdot(
+  \rhorm \ubf) = 0
 \end{equation}
 and eq. \eqref{eq:et:nspre} reduces to
 
 \begin{equation}\label{eq:et:ns_general} 
 \rhorm \left (\dfrac{\partial \ubf}{\partial t} +
   \ubf \cdot \nabla \ubf 
-  \right ) + \Q = 0.
+  \right ) + \Q = 0
 \end{equation}
 which together with eq. \eqref{eq:et:mass_conc} is a general
 formulation of the Navier stokes equations. 
@@ -46,7 +46,7 @@ in the fluid and to external force fields. Putting that into
 eqs. \eqref{eq:et:mass_conc} and \eqref{eq:et:ns_general} gives
 
 \begin{equation}\label{eq:et:ns_incompressible}
- \nabla \cdot \rhorm = 0
+ \nabla \cdot \ubf = 0
 \end{equation}
 and
 
@@ -56,4 +56,27 @@ and
   \right ) = - \nabla \Prm  + \mu \nabla^2 \ubf + \F
 \end{equation}
 where $\Prm$ is the pressure, $\mu$ the kinematic viscosity and $\F$
-are the contributions from  external forces.
+is the contributions from  external forces.
+
+\subsection{Boundary conditions}
+
+At hard boundaries (walls), the boundary conditions to
+eqs. \eqref{eq:et:ns_incompressible} and \eqref{eq:et:ns_mom} are set
+on the velocity of either a Dirichlet or Neumann type. In most
+physical situations the Dirichlet condition is used which corresponds
+to that there is a friction between the fluid and the wall, usually
+full friction, i.e. when no relative movement between fluid and wall
+is present and the velocity at the wall boundary is set to zero, i.e.
+
+\begin{equation}
+\ubf = 0 \;,\;\; \x \in \Gamma
+\end{equation} 
+where $\Gamma$ denotes the boundary. The Neumann type conditions are
+used for no-friction walls where the normal component of the
+derivative of the velocity is specified, usually to zero.
+
+At wet boundaries, inlets and outlets, of the domain various boundary
+conditions may be set. For instance the pressure or the velocity could
+be fixed. In the case of a fixed pressure boundary, a flow direction
+must also be specified for completeness. \cite{some fluid dynamics
+  text}

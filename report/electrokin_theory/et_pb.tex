@@ -21,7 +21,8 @@ $y$ varying in a direction out from the wall into the liquid,
 eq. \eqref{pb_constant_flux} reads
 
 \begin{equation}\label{eq:pb_eq_for_C}
-\frac{1}{\C} \dfrac{d \C}{d y} + \frac{zq_e}{k_BT} \dfrac{d \psirm}{d y} = 0
+\frac{1}{\C} \dfrac{d \C}{d y} + \frac{zq_e}{k_BT} \dfrac{d \psirm}{d
+  y} = 0.
 \end{equation}
 
 The charge density is determined by solving eq. \eqref{eq:pb_eq_for_C}
@@ -58,14 +59,13 @@ the Poisson-Boltzmann equation in one dimension
 
 \subsubsection{The Debye–Hückel approximation}
 Historically, the non-linear nature of eq. \eqref{eq:pb_real}
-complicates when it comes to solving it. This was a major difficulty
-in the past when the computational power at hands were rather
-limited. A linearisation is therefore sometimes done, this linear
-version of the PB equation is often referred to as the Debye–Hückel
-approximation. In this work, when it comes to the solving the PB
-equation, the full non-linear version will be considered. The solution
-of the linearisation gives however, something to compare with and will
-be used when defining a characteristic length scale of the EDL.
+complicated when it came to solving it. This was a major difficulty in
+the past when the computational power at hands were rather limited. A
+linearisation is therefore sometimes done, this linear version of the
+PB equation is often referred to as the Debye–Hückel
+approximation. The solution of the linearisation gives however,
+something to compare with and will be used when defining a
+characteristic length scale of the EDL.
 
 For a 1:1 electrolyte solution, eq. \eqref{eq:pb_real} reduces to
 
@@ -84,24 +84,30 @@ where $\kappa^{-1}$ is the Debye length and gives a measure for the
 characteristic size of the EDL.
 
 \subsubsection{Limitations of the Poisson-Boltzmann model}
-From the derivation of the Poisson-Boltzmann equation above, two main
-assumptions are made. First the system is considered to be at thermal
-equilibrium. And second the system is assumed to infinitely large. 
+As the Poisson-Boltzmann equation is derived several assumptions are
+made. First, the net flux of ions are assumed to be zero and that the
+advective contribution the flux is negligible. Thus, the PB equation is
+only applicable when the system is at (or very close) thermodynamical
+equilibrium.
 
-In this work, flows of ionic solution will be studied and the
-assumption with thermodynamical equilibrium does not apply. However
-for low-speed flows the model may still be a decent approximation,
-which will be investigated. 
+\todo{Continue this discussion...}
 
-The second assumption, may also stay unfulfilled in some cases
-investigated here. The fluid in contact with the wall must be of
-substantial size in relation to the EDL thickness. There will be
-cases where the choice of $\zeta$ potential in combination with thin
-channels will make this assumption not fulfilled.
 
-Since the PB equation is unable to model the system of
-interest, a different approach will be presented. However, throughout
-this work, references and comparisons with the PB model will be made. 
+%% In this work, flows of ionic solution will be studied and the
+%% assumption with thermodynamical equilibrium does not apply. However
+%% for low-speed flows the model may still be a decent approximation,
+%% which will be investigated.
+
+%% The second assumption, may also stay unfulfilled in some cases
+%% investigated here. The fluid in contact with the wall must be of
+%% substantial size in relation to the EDL thickness. There will be
+%% cases where the choice of $\zeta$ potential in combination with thin
+%% channels will make this assumption not fulfilled.
+
+%% Since the PB equation is unable to model the system of
+%% interest, a different approach will be presented. However, throughout
+%% this work, references and comparisons with the PB model w
+%% ill be made. 
 
 
 %intro

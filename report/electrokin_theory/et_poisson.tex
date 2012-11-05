@@ -1,4 +1,4 @@
-\section{The potential - Poisson's equation}
+\section{The potential - Poisson's equation}\label{sec:et:poisson}
 To be able to model the flow dynamics of liquids in a channel with
 present EDLs, the potential and charge distribution
 in the channel must be determined. These quantities are mutually
@@ -7,7 +7,6 @@ related through Poisson's equation for electrostatics:
 \begin{equation}\label{eq:pb}
 \nabla^2\psirm = -\frac{\rho_e}{\epsilon_r \epsilon_0}
 \end{equation}
-
 where $\psirm$ is the electrical potential, $\rho_e$ the electrical
 charge density, $\epsilon_r$ is the relative permittivity and
 $\epsilon_0$ the vacuum permittivity. Under certain assumptions, the
@@ -18,7 +17,7 @@ Poisson-Boltzmann equation, further discussed in section \ref{sec:et:pb}.
 \subsection{Boundary conditions}
 At the charged boundaries, most physical situations may be covered by
 either specifying the potential or the surface charge density. The
-former would be boundary condition of Dirichlet type:
+former would be a boundary condition of Dirichlet type:
 
 \begin{equation}
 \psirm(\x) = \zeta(\x)\;,\;\; \x \in \Gamma
