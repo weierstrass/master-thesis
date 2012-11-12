@@ -22,7 +22,7 @@ the liquid as whole. The volumetric force affecting the fluid from
 the presence of the streaming potential is then given by:
 
 \begin{equation}
-\F = \rho_e \nabla \phi
+\F = - \rho_e \nabla \phi
 \end{equation}
 where $\rho_e$ is the charge density. This is an example of how the
 charge density from the Nernst-Planck equation may couple to the force
@@ -30,9 +30,19 @@ term in Navier-Stokes equations.
 
 This force will always be affecting the fluid in an direction opposite
 of that of the net flux of charge, i.e. the force will slow the fluid
-down, this is illustrated in fig. \ref{fig:et:electrovis}. This effect
+down, this is illustrated in fig. \ref{fig:et:ev}. This effect
 that a moving net charged fluid is slowed down is called the
 \emph{electroviscous effect}. The name originates from that a similar
 effect might be achieved by increasing the viscosity of the fluid.
 
-\todo{bild ion channel!!}
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{fig/channel_electroviscous.pdf}
+\end{center}
+\caption{Example of an electroviscous system. The fluid is driven by a
+  pressure gradient, $\nabla \Prm$. The direction of the forces on the
+  fluid. The force originates from the potential difference that
+  builds up along the channel, $\phi$. The force is always opposite to
+  the flow direction, thus slowing the flow down.}
+\label{fig:et:ev}
+\end{figure}
