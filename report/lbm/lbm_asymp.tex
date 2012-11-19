@@ -1,0 +1,134 @@
+\section{Asymptotic analysis}\label{sec:lbm:asym}
+Methods from asymptotic analysis will, in this section, be used to
+investigate the macroscopic limit of the general LBE. Detailed and
+specific analyses for the three different equations considered will be
+presented in sections \ref{sec:lbm:asym_np}, \ref{sec:lbm:asym_ns} and
+\ref{sec:lbm:asym_pe}. Asymptotic analysis is basically about
+describing mathematical objects in some limit, e.g. how a function
+behaves for large or small values of some parameter. Consider for
+example the series expansion of $\exp(\epsilon)$:
+
+\begin{equation}
+\exp(\epsilon) = 1 + \epsilon + \epsilon^2/2 + \epsilon^3/6 + \mathcal{O}(\epsilon^4) 
+\end{equation}
+It is clear that for sufficiently small values of $\epsilon$, the
+terms of higher order is negligible to those of lower order and the
+series may be truncated at some point and still be a good
+approximation of the expression.
+
+There are different approaches to go from the discrete LBE to a
+continuous macroscopic equation. The most frequently applied one to
+obtain the Navier-Stokes equations is the Chapman-Enskog method
+\cite{junk-boundary}, which will reproduce the compressible
+equations. An other method, often employed by M. Junk and his
+associates e.g. in \cite{junk-asym}, is a method based on regular
+asymptotic expansions, this is the method that will be utilised in
+this work and will in the case of Navier-Stokes reproduce the
+incompressible equations. A brief discussion of the differences between
+the Chapman-Enskog and the regular expansion approaches will be carried
+out at the end of this section.
+
+The basic idea behind the analysis is to expand the distribution
+function $\fii$ in some small parameter, $\epsilon$. Also this
+parameter will be related to the spatial and time scales. The
+macroscopic limit is obtained by taking the taylor expansion of the
+discrete LBE and comparing terms of equal order in
+$\epsilon$. Together with the fact that certain quantities is
+invariant under collisions, macroscopic differential equations is
+obtained. Now follows the part of the analysis which is common for the
+three equations, the more equation specific analysis is carried out in
+sections \ref{sec:lbm:asym_np}, \ref{sec:lbm:asym_ns} and
+\ref{sec:lbm:asym_pe} respectively.
+
+\subsection{Motivation of the choice of expansion parameter}
+The expansion parameter should be a small dimensionless number. If the
+lattice is dense enough with respect to the characteristic length
+scale of the system, a suitable choice is the Knudsen number which is
+defined as the ratio of the mean free path, $\delta_x$, and the
+characteristic length of the system under consideration, $\ell_0$,
+i.e. $\epsilon = \delta_x /\ell_o$. To be able to perform the
+asymptotic analysis we must also relate the time scale to this
+parameter. From the fact that the lattice speed $c_s =
+\delta_x/\delta_t$ and by introducing a characteristic speed, $u_o =
+\ell_0/t_0$, we have
+
+\begin{equation}\label{eq:lbm:rel}
+\epsilon = \frac{\delta_x}{\ell_0} = \frac{c_s}{u_0}\frac{\delta_t}{t_0}
+\end{equation}
+It is now clear that what determines the relation between the
+timescale and the parameter $\epsilon$ is the ratio of the
+characteristic speed and the lattice speed which is usually referred
+to as the Mach number, Ma. In our particular case we will operate in
+the incompressible limit, i.e. Ma $\ll$ 1 and a suitable choice is a
+small number, thus Ma = $\epsilon$ is chosen \cite{junk-boundary}. The
+discretisation of the space and time step is then
+
+\begin{equation}
+\delta_x'^2 = \delta_t' = \epsilon^2
+\end{equation}
+where the primes denote dimensionless variables. This particular
+scaling is usually referred to as diffusive scaling.
+
+\subsection{Expanding the LBE}
+The LBE, eq. \eqref{eq:lbm:lbe}, with dimensionless variables and the
+BGK collision operator reads:
+
+\begin{equation}\label{eq:lbm:nodim_lbe}
+f_i(\x' + \epsilon \cbf_i', t' + \epsilon^2) - f_i(\x', t') = -\omega \left[
+  f_i(\x', t') - f_i^{(eq)}(\x', t') \right].
+\end{equation} 
+The primes denoting dimensionless variables will, for readability
+reasons, from hereon be dropped. If nothing else is stated we always
+consider dimensionless variables.
+
+To obtain a differential equation, the difference equation in
+eq. \eqref{eq:lbm:nodim_lbe} is taylor expanded, which gives
+
+\begin{equation}\label{eq:lbm:taylor_lbe}
+\ep(\pd\fii) + \ep^2 (\partial_t\fii + (\pd \fii)^2/2 ) + \ep^3
+(\partial_t (\pd\fii) + (\pd\fii)^3/6) + \bigO{\ep^4} = 
+-\omega \left[
+  f_i - f_i^{(eq)} \right]
+\end{equation}
+Expanding also $\fii$ and $\feq$ in the parameter $\epsilon$:
+
+\begin{equation}\label{eq:lbm:fi_exp}
+\fii = \fie{0} + \ep\fie{1} + \ep^2\fie{2} + \ep^3\fie{3} + \bigO{\ep^4}
+\end{equation}
+
+\begin{equation}\label{eq:lbm:fi_eq_exp}
+\feq = \feqe{0} + \ep\feqe{1} + \ep^2\feqe{2} + \ep^3\feqe{3} +
+\bigO{\ep^4}
+\end{equation}
+and inserting these expressions into eq. \eqref{eq:lbm:taylor_lbe}
+gives an equation with terms of varying orders of $\ep$. Separating
+this equation in equations of common orders allows for an analysis of
+what happens at different scales of $\epsilon$. For the four leading
+orders in $\ep$ we have:
+
+\begin{equation}\label{eq:lbm:ep0}
+\ep^0:\;\; 0 = -\omega \left[
+  \fie{0} - \feqe{0} \right],
+\end{equation}
+
+\begin{equation}\label{eq:lbm:ep1}
+\ep^1:\;\; \pd\fie{0} = -\omega \left[
+  \fie{1} - \feqe{1} \right],
+\end{equation}
+
+\begin{equation}\label{eq:lbm:ep2}
+\ep^2:\;\; \pd\fie{1} + \partial_t\fie{0} + (\pd \fie{0})^2/2 =
+-\omega \left[ \fie{2} - \feqe{2} \right]
+\end{equation}
+and
+\begin{equation}\label{eq:lbm:ep3}
+\ep^3:\;\; \pd\fie{2} + \partial_t\fie{1} + (\pd \fie{1})^2/2 +
+\partial_t (\pd\fie{0}) + (\pd\fie{0})^3/6 = -\omega \left[ \fie{3} -
+  \feqe{3} \right].
+\end{equation}
+
+The idea is now that for an equation of a particular order in $\ep$,
+use collision invariants and eliminate unknown $\fie{n}$:s by using
+equations of lower order in $\ep$. This will in the end result in
+differential equations of macroscopic variables, given by moments of
+the $\fii$:s.

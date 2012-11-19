@@ -82,14 +82,17 @@ operators exist and will be further discussed in section
 When solving eq. \eqref{eq:lbm:lbe} two computational tasks is
 unidentified. Thus  
 
-\section{The collision operator}\label{sec:lbm:col}
-discussions on different col. operators, focus on BGK since that is
-the one used. collision invariants..
-
-\subsection{The BGK operator}
+\input{lbm/lbm_col}
 
 \section{The lattice}\label{sec:lbm:lattice}
 symmetry... multi speed... weights ... D2Q9
+\begin{equation}\label{eq:lbm:weights}
+w_i = ...
+\end{equation}
+
+\input{lbm/lbm_asymp}
+
+\input{lbm/lbm_np}
 
 \section{LBM for Navier-Stokes}
 \subsection{Chapman-Enskog analysis}
@@ -98,9 +101,6 @@ symmetry... multi speed... weights ... D2Q9
 how to add a ''forcing'' term in the method.
 
 \section{LBM for Poisson's equation}
-\subsection{Chapman-Enskog}
-
-\section{LBM for Nernst-Planck}
 \subsection{Chapman-Enskog}
 
 \section{Algorithm/Scheme for solving the coupled equations}

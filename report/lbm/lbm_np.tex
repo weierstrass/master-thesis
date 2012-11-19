@@ -1,0 +1,98 @@
+\section{LBM for the Nernst-Planck equation} 
+The method presented here is based on representing the Nernst-Planck
+equation, eq. \eqref{eq:et:np}, as an equation of advection-diffusion
+type. Considering the quantity:  
+
+\begin{equation}
+\bar{\ubf} = \ubf -
+  \frac{zq_eD}{k_BT}\nabla\psirm
+\end{equation}
+as an effective advective velocity, we have:
+
+\begin{equation}\label{eq:lbm:adv-dif}
+\dfrac{\partial \rho}{\partial t} + \nabla \cdot ( \bar{\ubf} \rho -
+  D\nabla \rho ) = 0
+\end{equation}
+which is a mass conservation equation with fluxes from diffusion and
+from advection respectively. The letter $\C$ for denoting the charge
+concentration has in this section been replaced by the letter $\rho$
+for avoiding the risk of confusing it with the lattice velocities
+which traditionally are denoted by ${\ci}$.
+
+A collision operator of BGK type, eq. \eqref{eq:lbm:bgk} will be used
+together with a D2Q9 lattice. The lattice-Boltzmann equation then
+reads:
+
+\begin{equation}
+f_i(\x + \cbf_i\delta_t, t + \delta_t) - f_i(\x, t) = -\omega \left[ f_i(\x, t) - f_i^{(eq)}(\x, t) \right]
+\end{equation}
+with $\{\cbf_i\}$ for the D2Q9 lattice as in
+eq. \eqref{eq:lbm:d2q9_c}. The equilibrium function, $\feq$, is chosen
+as \cite{alexey-tobias}:
+
+\begin{equation}\label{eq:lbm:np_feq}
+\feq = w_i \rho \left ( 1 + \frac{\ci \cdot \ubar}{c_s^2} \right)
+\end{equation}
+with the weights, $w_i$, as in eq. \eqref{eq:lbm:weights}. The charge
+density and charge flux density is obtained by taking the zeroth and
+first moments of the distribution function respectively, i.e:
+
+\begin{equation}\label{eq:lbm:rho_mom}
+\rho = \sum_i \fii
+\end{equation}
+and
+\begin{equation}\label{eq:lbm:j_mom}
+\jj = \sum_i \fii \ci
+\end{equation}
+The diffusion constant, $D$, is related to the relaxation parameter
+$\omega$ through 
+
+\begin{equation}
+D = c_s^2 \left( \frac{1}{2} - \frac{1}{\omega} \right).
+\end{equation}
+
+\subsection{Asymptotic analysis}
+To motivate the appearance of the above suggested method for solving
+eq. \eqref{eq:lbm:adv-dif} and for showing under what premises the
+method is valid, the macroscopic limit of the discrete scheme will
+now be analysed in an asymptotic manner.
+
+From the expansion of $\fii$ in eq. \eqref{eq:lbm:fi_exp} and from
+eqs. \eqref{eq:lbm:rho_mom} and \eqref{eq:lbm:j_mom} follow the
+expansions of the charge and flux density respectively as
+
+\begin{equation}
+\rho = \rhoe{0} + \ep\rhoe{1} + \ep^2\rhoe{2} + \ep^3\rhoe{3} + \bigO{\ep^4}
+\end{equation} 
+and
+
+\begin{equation}
+\jj = \je{0} + \ep\je{1} + \ep^2\je{2} + \ep^3\je{3} + \bigO{\ep^4}
+\end{equation} 
+The advective velocity is also expanded as: 
+
+\begin{equation}
+\ubar = \ubare{0} + \ep\ubare{1} + \ep^2\ubare{2} + \ep^3\ubare{3} + \bigO{\ep^4}
+\end{equation}
+By plugging these expansion into the equilibrium distribution
+eq. \eqref{eq:lbm:np_feq}, the expansion in
+eq. \eqref{eq:lbm:fi_eq_exp} is obtained. The terms of order zero is
+used in the zeroth order equation of the LBE, eq. \eqref{eq:lbm:ep0},
+which gives
+
+\begin{equation}
+\fie{0} = w_i\rhoe{0} \left( 1 + \frac{\ci \cdot \ubare{0}}{c_s^2} \right).
+\end{equation}
+However, since we are only considering the low Mach limit,
+i.e. $|\ubar| \sim \ep$, we will in this analysis assume that
+$\ubare{0} = 0$. And thus $\ubar$ will be of order $\ep$ to leading
+order. It is possible to show \cite{junk-asymp} that if $\ubar$ is
+initialised small it will also stay small if no major momentum sources
+are present, thus it is a question of proper initialisation if the
+assumption holds or not. Thus the expression for $\fie{0}$ reduces to
+
+\begin{equation}
+\fie{0} = w_i\rhoe{0}
+\end{equation}
+
+
