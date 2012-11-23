@@ -1,0 +1,42 @@
+\section{The Boltzmann transport equation}
+Consider one litre of air. At NTP, the volume will contain in the
+order of $10^{22}$ molecules. In order to model this system
+microscopically, 6 variables per molecule will be needed to describe
+the microstate of the system. Just to store the state of the system in
+a computer would require more space than the estimated size of the
+whole world wide web times one million \cite{wolfram-alpha-web}. Thus,
+for these kind of systems, the microscopic approach is somewhat
+impractical.
+
+Fortunately, statistical approaches have been developed for these kind
+of problems. A fundamental quantity used for describing the system is
+a continuous probability density distribution. Consider a volume of
+$d^3\x d^3\mathbf{p}$ in phase space, the number of molecules, $dN$ is
+then given through the density distribution, $f$ as
+
+\begin{equation}
+dN(\x, \p, t) = f(\x, \p, t)d^3\x d^3\p.
+\end{equation}
+Thus $f(\x, \p, t)$ is a measure for the number of particles at
+location $\x$ with momentum $\p$ at time $t$. 
+
+In the late 19th century, Boltzmann developed a model for the time
+evolution of $f$. To do this he had to make several
+assumptions. First, only collisions between two particles are
+considered, this makes the equation mostly applicable to dilute
+gases. Second, the two particles colliding are assumed to be
+uncorrelated before the collision. Third, external forces are assumed
+not to affect the collisions \cite{wolf-gladrow}. The equation is
+named after its father to the Boltzmann (transport) equation and reads:
+
+\begin{equation}\label{eq:lbm:boltzmann-eq}
+\partial_t f + \frac{\p}{m} \cdot \nabla_{\x}f + \frac{\F}{m} \cdot
+\nabla_{\ubf}f = Q(f, f)
+\end{equation}
+where $f$ is the distribution function for a single species collection
+of particles of mass $m$, $\F$ is external forces, $\p$ is momentum,
+$\nabla_{\x}$ and $\nabla_{\ubf}$ are the gradients in location and
+velocity space respectively. The rights hand side contains the so
+called collision term which in the general case is expressed as an
+integral. However, in applications, it is usually approximated by some
+simpler expression.

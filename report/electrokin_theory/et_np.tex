@@ -4,7 +4,7 @@ environment. In the model proposed here, influences from: advection of
 the electrolyte, diffusion due to concentration gradients and effects
 from the electric field originating from charged objects placed at the
 border or in the flow is considered. Charge conservation without any
-external sources of the ion density, $\mathrm{C}(\x, t)$, gives:
+external sources of the ion density, $\C(\x, t)$, gives:
 
 \begin{equation}\label{eq:charge_conc}
 \dfrac{\partial \C}{\partial t} + \nabla \cdot \J = 0
@@ -19,7 +19,7 @@ due to advection and diffusion respectively are
 \end{equation}
 and 
 \begin{equation}
-\mathbf{J}_{dif} = -D\nabla \mathrm{C} 
+\mathbf{J}_{dif} = -D\nabla \C 
 \end{equation}
 where $\mathbf{u}$ is the advective velocity and $D$ is a diffusion
 coefficient. The ionic flux due to the presence of an electric
@@ -38,7 +38,7 @@ gives
 
 \begin{equation}\label{eq:et:np}
 \dfrac{\partial \C}{\partial t} = \nabla \cdot \left [
- D\nabla \mathrm{C} - \C\ubf + \frac{zq_eD}{k_BT}\C\nabla\psirm
+ D\nabla \C - \C\ubf + \frac{zq_eD}{k_BT}\C\nabla\psirm
 \right]
 \end{equation}
 which is a known result often referred to as the Nernst-Planck

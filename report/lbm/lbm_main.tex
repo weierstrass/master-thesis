@@ -1,112 +1,77 @@
 \chapter{The lattice-Boltzmann method}
 Rather than modelling on a macroscopic or microscopic scale, the
 lattice-Boltzmann method operates at a scale in between those, often
-referred to as a mesoscopic scale.
-
-short intro of this section
-micro macro meso... new method..
+referred to as a mesoscopic scale. Nowadays, the method is most
+frequently used in modelling fluid dynamics, i.e. solving the
+macroscopic Navier-Stokes equations. However, the lattice-Boltzmann
+method is not limited to this case and may be used to model other
+macroscopic systems as well. In this chapter a LBM approach will, in
+addition to the Navier-Stokes equations, also be formulated for the
+Nernst-Planck and the Poission's equation.
 
 \section{Historical overview}
 With the introduction of electronic calculating machines came also a
-new possibility of tackling problems. New fields of computational
-science was born and methods for solving both new traditional problems
-were developed. 
+completely new possibility of tackling problems. New fields of
+computational science was born and methods for solving both new and
+traditional problems were developed.
 
 The idea of using a discrete and simplified version of the
 Boltzmann-equation dates back to the mid 60's \cite{scholarpedia-lbm}
 with an experimental attempt to model simple gas dynamics. However, at
 the time, this kind of statistical computational approaches was not
 considered a serious alternative for the modelling of more
-sophisticated fluid behaviour. It was first in the mid 80's when
-Frisch, Hasslacher and Pomeau showed that a lattice automaton, with a
-lattice of certain symmetry and that conserved mass and momentum in
-the collisions, reproduced the Navier-Stokes equations in a
-macroscopic limit. It was with this paper and the always increasing
-computational power that made the idea of fluid modelling on a
-mesoscopic scale a serious research topic.
+sophisticated and complex systems such as fluid behaviour. It was
+first in the mid 80's when Frisch, Hasslacher and Pomeau showed that a
+lattice automaton, with a lattice of certain symmetry and that
+conserved mass and momentum in the collisions, reproduced the
+Navier-Stokes equations in a macroscopic limit. It was by their work
+and the always increasing computational power that made the idea of
+fluid modelling on a mesoscopic scale a serious research
+topic. \cite{wolf-gladrow}
 
-The lattice gas automata (LGA) approach suffered from some flaws,
+But the lattice gas automata (LGA) approach suffered from some flaws,
 e.g. that the boolean nature of the method introduced statistical
-noise and that lack of symmetry in the lattice made the advection
+noise and that lack of symmetry in the lattices used made the advection
 non-isotropic. The statistical noise was usually dealt with by
 averaging which resulted in a coarsed domain and the advection issue
 was handled by introducing lattices of higher symmetry. As the flaws
 of the LGA approach was dealt with one after one, the method evolved
 into what we today know as the lattice-Boltzmann method, with the
 crucial refinement of using continuous distributions over boolean
-variables. \cite{wolf-gladrow}
+variables. \cite{wolf-gladrow} 
 
-\section{The Boltzmann transport equation}
-The continuous lbe is bte.. distribution function
+Today, the lattice-Boltzmann method is in many situations indeed a
+competitor to more traditional CFD methods. For example with
+advantages when it comes to parallelisation or implementing boundary
+conditions in complex geometries. The downside with the LBM is the
+lack of theoretical work done and lack of literature compared to the
+case with traditional methods such as finite element/volume
+methods. \cite{junk-asym}
 
+\input{lbm/lbm_boltzmann}
 
-\section{Basic idea of the LBM}
-As previously noted, the lattice-Boltzmann is a mesoscopic
-method. This means that the modelling is neither done on a molecular
-level nor by direct solving the macroscopic equations involved. The
-aim, in the most situations with the lattice-Boltzmann is indeed to
-solve some macroscopic equation but not direct. Instead a statistical
-model is used with various mesoscopic variables that, in some limit,
-reproduces the macroscopic variables. It is also possible to ensure
-that these variables fulfil a certain macroscopic equation by using a
-certain scheme.
-
-Basically the lattice-Boltzmann method solves a discretised version of
-eq. \eqref{eq:lbm:boltzmann-eq} for the distribution functions and
-then macroscopic quantities are determined from the distribution
-functions. Both the spatial positions and the velocity space is
-discretised allowing the distributions to ``sit'' only at certain
-positions and to stream to neighbouring locations only in the
-directions specified by the discretised velocity space. Usually in two
-dimensions the velocity space is discretised into 9 distinct
-velocities, more about the choice of lattice is discussed in section
-\ref{sec:lbm:lattice}. In this case 9 distribution functions are
-needed per node which might correspond to one or two macroscopic
-variables but is indeed fewer than the number of variables needed for
-a microscopic approach.
-
-The discretised Boltzmann equation is referred to as the
-lattice-Boltzmann equation and is one of the fundamental corner stones
-in the lattice-Boltzmann method, it reads:
-
-\begin{equation}\label{eq:lbm:lbe}
-f_i(\x + \cbf_i\delta_t, t + \delta_t) - f_i(\x, t) = \Omega_i(\x, t)
-\end{equation}
-where $f_i$ denotes the distribution function for direction $\cbf_i$,
-$\delta_t$ is the time step and $\Omega_i$ is the (for
-now non-specified) collision operator. Various forms of collision
-operators exist and will be further discussed in section
-\ref{sec:lbm:col}.
-
-\subsection{Computational algorithm}
-When solving eq. \eqref{eq:lbm:lbe} two computational tasks is
-unidentified. Thus  
+\input{lbm/lbm_basics}
 
 \input{lbm/lbm_col}
 
-\section{The lattice}\label{sec:lbm:lattice}
-symmetry... multi speed... weights ... D2Q9
-\begin{equation}\label{eq:lbm:weights}
-w_i = ...
-\end{equation}
+\input{lbm/lbm_lattice}
 
 \input{lbm/lbm_asymp}
 
 \input{lbm/lbm_np}
 
 \section{LBM for Navier-Stokes}
-\subsection{Chapman-Enskog analysis}
+\subsection{Asymptotic analysis}\label{sec:lbm:asym_ns}
 
 \subsection{Forcing schemes}
 how to add a ''forcing'' term in the method.
 
-\section{LBM for Poisson's equation}
-\subsection{Chapman-Enskog}
+\input{lbm/lbm_pe}
 
 \section{Algorithm/Scheme for solving the coupled equations}
 the iterative scheme used.
 
-\section{Boundary conditions}
+\section{Boundary conditions}\label{sec:lbm:bound}
 discussion and description of the boundary conditions
 \subsection{bounce back}
 accuracy, e.g. second order accurate if placed between node planes...
@@ -117,4 +82,4 @@ accuracy, e.g. second order accurate if placed between node planes...
 \section{Physical units vs lattice units}
 how to interchange between them... etc...
 
-\section{}
+\section{Chapman-Enskog vs regular expansion analysis}

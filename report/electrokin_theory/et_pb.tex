@@ -1,13 +1,13 @@
 \subsection{Poisson-Boltzmann equation}\label{sec:et:pb}
 Consider a system consisting of an electrolyte in contact with a
 (flat) charged wall.  Under certain assumptions, it is possible to
-explicitly determine the charge density in eq. \eqref{np} as a
+explicitly determine the charge density in eq. \eqref{eq:et:np} as a
 function of the electric potential. E.g. if there is no advection
 present and if the system has reached a steady state, i.e. $\partial
 \C /\partial t = 0$ and $\ubf = \mathbf{0}$ we have:
 
 \begin{equation}\label{pb_constant_flux}
-D\nabla \mathrm{C} + \frac{zq_eD}{k_BT}\C\nabla\psirm = \alpha
+D\nabla \C + \frac{zq_eD}{k_BT}\C\nabla\psirm = \alpha
 \end{equation} 
 where $\alpha$ is some arbitrary constant. Due to the steady state
 assumption, what the equation above actually says is that the net flux
@@ -63,21 +63,21 @@ complicated when it came to solving it. This was a major difficulty in
 the past when the computational power at hands were rather limited. A
 linearisation is therefore sometimes done, this linear version of the
 PB equation is often referred to as the Debye–Hückel
-approximation. The solution of the linearisation gives however,
-something to compare with and will be used when defining a
-characteristic length scale of the EDL.
+approximation. The solution of the linearisation gives, something to
+compare with and is usually used when defining a characteristic length
+scale of the EDL.
 
 For a 1:1 electrolyte solution, eq. \eqref{eq:pb_real} reduces to
 
 \begin{equation}
-\frac{d^2\psi(x)}{dx^2} = \frac{2n^{\infty}q_ez}{\epsilon_r
+\frac{d^2\psi(x)}{dx^2} = \frac{2\C^{\infty}q_ez}{\epsilon_r
   \epsilon_0}
 \sinh\left(\frac{z q_e \psi(x)}{k_BT}\right).
 \end{equation}
 and the linearised equation is
 
 \begin{equation}
-\frac{d^2\psi(x)}{dx^2} = \frac{2n^{\infty}q_e^2z^2}{\epsilon_r
+\frac{d^2\psi(x)}{dx^2} = \frac{2\C^{\infty}q_e^2z^2}{\epsilon_r
   \epsilon_0 k_B T} \psi(x) = \kappa^2 \psi(x)
 \end{equation}
 where $\kappa^{-1}$ is the Debye length and gives a measure for the

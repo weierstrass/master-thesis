@@ -1,0 +1,110 @@
+\section{LBM for Poisson's equation}
+As Poisson's equation, eq. \eqref{eq:pb} is considered, a fundamental
+difference to the Nernst-Planck and Navier-Stokes equations is
+imediatley noted. It is not a differential equation of parabolic but
+of elliptic type. If we consider what has been said about the LBM so
+far in this chapter, it seems that it is a method that deals with
+parabolic equations and not elliptic. However, by introducing a time
+derivative to the Poisson's equation and only considering the steady state
+solution the LBM may be used even for this equation. A diffusion-like
+equation with a source term is then obtained
+
+\begin{equation}\label{eq:lbm:poi_dif}
+\partial_t\rho + \nabla^2 \rho = \R
+\end{equation}
+where $\R$ is the right-hand side of the Poisson's equation.
+
+A LBM for this equation will now be formulated. The LBE to be solved
+in this case is, an equation of the form:
+
+\begin{equation}
+f_i(\x + \cbf_i\delta_t, t + \delta_t) - f_i(\x, t) = -\omega \left[
+  f_i(\x, t) - f_i^{(eq)}(\x, t) \right] + \Gi(\R)
+\end{equation}
+where $\Gi(\R)$ is an addition to the BGK collision operator to account
+for the source term $\R$ in eq. \eqref{eq:lbm:poi_dif}. The equilibrium
+distribution is given by
+
+\begin{equation}
+\feq = w_i \rho
+\end{equation}
+where $w_i$ are the weights in eq. \eqref{eq:lbm:weights}.
+
+The quantity $\rho$ which in this work is interpreted to electric
+potential in the steady state is determined by
+
+\begin{equation}
+\rho = \sum_i \fii
+\end{equation}
+and the quantity which, to us, is of even more interest, i.e. the
+electric field, is given by
+
+\begin{equation}
+\nabla \rho = - \frac{\omega}{c_s^2 \delta_x} \sum_i \fii \ci.
+\end{equation}
+
+Finally, the addtional source term in the collision operator, $\Gi(\R)$,
+is given by
+
+\begin{equation}\label{eq:lbm:gi}
+\Gi(\R) = w_ic_s^2 \left( \frac{1}{2} - \frac{1}{\omega} \right)\R.
+\end{equation}
+
+\subsection{Asymptotic analysis}\label{sec:lbm:asym_pe}
+The given method for solving eq. \eqref{eq:lbm:poi_dif} will now be
+motivated by preforming an asymptotic analysis of the suggested LBE.
+
+$\fii$ is expanded as in eq. \eqref{eq:lbm:fi_exp} which gives an
+exansion of $\rho$ as in eq. \eqref{eq:lbm:rho_exp}. Further is 
+the source term $\R$ expanded into 
+
+\begin{equation}\label{eq:lbm:R_exp}
+\R = \Rexp{0} + \ep\Rexp{1} + \ep^2\Rexp{2} + \ep^3\Rexp{3} + \bigO{\ep^4}
+\end{equation} 
+which also gives an expansion for the LBE source term as
+
+\begin{equation}\label{eq:lbm:G_exp}
+\Gi = \Gie{0} + \ep\Gie{1} + \ep^2\Gie{2} + \ep^3\Gie{3} + \bigO{\ep^4}.
+\end{equation} 
+
+The equilibrium distribution is expanded by plugging in the expansion
+of $\rho$ from eq. \eqref{eq:lbm:rho_exp}. This gives for the zeroth
+order equation in $\ep$, eq. \eqref{eq:lbm:ep0} that
+
+\begin{equation}
+\fie{0} = w_i\rhoe{0} + \frac{1}{\omega}\Gie{0}
+\end{equation}
+However, taking the first moment of the equation gives $\Gie{0} = 0$
+and the above expression for $\fie{0}$ reduces to
+
+\begin{equation}
+\fie{0} = w_i\rhoe{0}.
+\end{equation}
+
+Coninuing to the equation of first order in $\ep$,
+eq. \eqref{eq:lbm:ep1} and taking the zeroth moment gives that also
+$\Gie{1} = 0$. Taking the first moment of the same equation  gives
+
+\begin{equation}
+\nabla \rhoe{0} = - \frac{\omega}{c_s^2} \sum_i \fie{1} \ci \approx -
+\frac{\omega}{c_s^2 \delta_x} \sum_i \fii \ci
+\end{equation}
+Here, for the approximation, the expansion of $\fii$ is used together
+with the fact that $\ep = \delta_x$ in dimensionless variables.
+
+The next equation in $\ep$, i.e. the one of order two, will
+eventually give us what we are looking for. Taking the zeroth moment
+gives
+
+\begin{equation}
+-\frac{c_s^2}{\omega} \nabla^2 \rhoe{0} + \partial_t \rhoe{0} +
+\frac{c_s^2}{2}\nabla^2 \rhoe{0} = \sum_i \Gie{2}(\Rexp{2})
+\end{equation}
+From this equation, it is deduced that in order to obtain Poisson's
+equation in a steady state situation, i.e. when $\partial_t \rhoe{0} =
+0$ the right-hand side must fulfill the follwong condition
+
+\begin{equation}
+\sum_i \Gie{2}(\Rexp{2}) = c_s^2\left( \frac{1}{2} - \frac{1}{\omega} \right)\Rexp{2}
+\end{equation}
+One such $\Gie{2}(R)$ is the one described in eq. \eqref{eq:lbm:gi}. 
