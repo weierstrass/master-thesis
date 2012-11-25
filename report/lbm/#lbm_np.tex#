@@ -1,0 +1,141 @@
+\section{LBM for the Nernst-Planck equation}\label{sec:lbm:np}
+The method presented here is based on representing the Nernst-Planck
+equation, eq. \eqref{eq:et:np}, as an equation of advection-diffusion
+type. Considering the quantity:  
+
+\begin{equation}\label{eq:lbm:eff_adv}
+\bar{\ubf} = \ubf -
+  \frac{zq_eD}{k_BT}\nabla\psirm
+\end{equation}
+as an effective advective velocity, we have:
+
+\begin{equation}\label{eq:lbm:adv-dif}
+\dfrac{\partial \rho}{\partial t} + \nabla \cdot ( \bar{\ubf} \rho -
+  D\nabla \rho ) = 0
+\end{equation}
+which is a mass conservation equation with fluxes from diffusion and
+from advection respectively. The letter $\C$ for denoting the charge
+concentration has in this section been replaced by the letter $\rho$
+for avoiding the risk of confusing it with the lattice velocities
+which traditionally are denoted by ${\ci}$.
+
+A collision operator of BGK type, eq. \eqref{eq:lbm:bgk} will be used
+together with a D2Q9 lattice. The lattice-Boltzmann equation then
+reads:
+
+\begin{equation}
+f_i(\x + \cbf_i\delta_t, t + \delta_t) - f_i(\x, t) = -\omega \left[ f_i(\x, t) - f_i^{(eq)}(\x, t) \right]
+\end{equation}
+with $\{\cbf_i\}_{i=0}^{Q-1}$ for the D2Q9 lattice as in
+eq. \eqref{eq:lbm:d2q9_c}. The equilibrium function, $\feq$, is chosen
+as \cite{alexey-tobias}:
+
+\begin{equation}\label{eq:lbm:np_feq}
+\feq = w_i \rho \left ( 1 + \frac{\ci \cdot \ubar}{c_s^2} \right)
+\end{equation}
+with the weights, $w_i$, as in eq. \eqref{eq:lbm:weights}. The charge
+density and charge flux density is obtained by taking the zeroth and
+first moments of the distribution function respectively, i.e:
+
+\begin{equation}\label{eq:lbm:rho_mom}
+\rhorm = \sum_i \fii
+\end{equation}
+and
+\begin{equation}\label{eq:lbm:j_mom}
+\jj = \sum_i \fii \ci
+\end{equation}
+The diffusion constant, $D$, is related to the relaxation parameter
+$\omega$ through 
+
+\begin{equation}\label{eq:lbm:np_D}
+D = c_s^2 \left( \frac{1}{2} - \frac{1}{\omega} \right).
+\end{equation}
+
+\subsection{Asymptotic analysis}\label{sec:lbm:asym_np}
+To motivate the appearance of the above suggested method for solving
+eq. \eqref{eq:lbm:adv-dif} and for showing under what premises the
+method is valid, the macroscopic limit of the discrete scheme will now
+be analysed in an asymptotic manner. Note that for the advection
+diffusion equation mass will be conserved but flux will not be
+conserved.
+
+From the expansion of $\fii$ in eq. \eqref{eq:lbm:fi_exp} and from
+eqs. \eqref{eq:lbm:rho_mom} and \eqref{eq:lbm:j_mom} follow the
+expansions of the mass density and flux respectively as
+
+\begin{equation}\label{eq:lbm:rho_exp}
+\rho = \rhoe{0} + \ep\rhoe{1} + \ep^2\rhoe{2} + \ep^3\rhoe{3} + \bigO{\ep^4}
+\end{equation} 
+and
+
+\begin{equation}
+\jj = \je{0} + \ep\je{1} + \ep^2\je{2} + \ep^3\je{3} + \bigO{\ep^4}
+\end{equation} 
+The advective velocity is also expanded as: 
+
+\begin{equation}
+\ubar = \ubare{0} + \ep\ubare{1} + \ep^2\ubare{2} + \ep^3\ubare{3} + \bigO{\ep^4}
+\end{equation}
+By plugging these expansion into the equilibrium distribution
+eq. \eqref{eq:lbm:np_feq}, the expansion in
+eq. \eqref{eq:lbm:fi_eq_exp} is obtained. The terms of order zero is
+used in the zeroth order equation of the LBE, eq. \eqref{eq:lbm:ep0},
+which gives
+
+\begin{equation}
+\fie{0} = w_i\rhoe{0} \left( 1 + \frac{\ci \cdot \ubare{0}}{c_s^2} \right).
+\end{equation}
+However, since we are only considering advection in the low Mach
+limit, i.e. $|\ubar| \sim \ep$, we will in this analysis assume that
+$\ubare{0} = 0$. $\ubar$ will then be of order $\ep$ to leading
+order. It is possible to show \cite{junk-asym} that this assumption
+holds if $\ubar$ is initialised properly, i.e. small and if no major
+momentum sources are present. Thus the expression for $\fie{0}$
+reduces to
+
+\begin{equation}\label{eq:lbm:np_fi0}
+\fie{0} = w_i\rhoe{0}.
+\end{equation}
+
+We now continue to the equation of order one in $\ep$,
+eq. \eqref{eq:lbm:ep1}. Taking the zeroth moment gives the equation $0
+= 0$ which indeed is true but not very useful. Note that the right
+hand side vanishes due to mass conservation. $\fie{1}$ will be needed
+in the next step and is, by using eq. \eqref{eq:lbm:np_fi0}:
+
+\begin{equation}
+\fie{1} = -\frac{1}{\omega} (\pd)(w_i\rhoe{0}) + w_i\left( \rhoe{1} +
+\rhoe{0} \frac{\ci \cdot \ubare{1} }{c_s^2} \right).
+\end{equation}
+Taking the first moment of $\fie{1}$ gives the leading order in the
+flux ($\je{0} = 0$ since $\ubare{0} = 0$):
+
+\begin{equation}
+\je{1} = \rhoe{0}\ubare{1} - c_s^2/\omega\nabla\rhoe{0}
+\end{equation} 
+
+Continuing to the equation of order two in $\ep$,
+eq. \eqref{eq:lbm:ep2} and taking the zeroth moment of the equation
+gives
+
+\begin{equation}
+\nabla \cdot \je{1} + \partial_t \rhoe{0} + c_s^2/2\nabla^2 \rhoe{0} = 0
+\end{equation}
+and by inserting the expression for $\je{1}$ we end up with
+
+\begin{equation}
+\partial_t \rhoe{0} + \nabla \cdot \left [ \rhoe{0}\ubare{1} - c_s^2
+  \left( \frac{1}{\omega} - \frac{1}{2} \right)\nabla\rhoe{0} \right ]
+= 0
+\end{equation}
+which is an advection diffusion equation with a diffusion constant as
+in eq. \eqref{eq:lbm:np_D}. Since $\rhoe{0}$ fulfils the equation of
+interest, the solution $\rho$ that we get from the lattice-Boltzmann
+method is at least of first order accuracy. To determine the exact
+order of accuracy, higher order terms, $\rhoe{k > 0}$, must be
+determined. If also all those terms would be zero the method would be
+exact, unfortunately that is not the case. The analysis of higher order
+terms will not be performed here, but it is possible to show that
+$\rhoe{1}$ is zero only under certain premises, i.e. for a proper
+initialisation \cite{alexey-tobias}. $\rhoe{2}$ is however in general
+non-zero and the obtained solution is thus second order accurate.  

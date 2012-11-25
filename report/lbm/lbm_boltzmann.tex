@@ -1,4 +1,4 @@
-\section{The Boltzmann transport equation}
+\section{Statistical background}\label{sec:lbm:stat}
 Consider one litre of air. At NTP, the volume will contain in the
 order of $10^{22}$ molecules. In order to model this system
 microscopically, 6 variables per molecule will be needed to describe
@@ -10,9 +10,11 @@ impractical.
 
 Fortunately, statistical approaches have been developed for these kind
 of problems. A fundamental quantity used for describing the system is
-a continuous probability density distribution. Consider a volume of
-$d^3\x d^3\mathbf{p}$ in phase space, the number of molecules, $dN$ is
-then given through the density distribution, $f$ as
+a continuous probability density distribution, $f$. This distribution
+function may be regarded as an average over the microstates. Consider a
+volume of $d^3\x d^3\mathbf{p}$ in phase space, the number of
+molecules, $dN$ in this volume is then given through the density
+distribution, $f$ as
 
 \begin{equation}
 dN(\x, \p, t) = f(\x, \p, t)d^3\x d^3\p.
@@ -27,16 +29,51 @@ considered, this makes the equation mostly applicable to dilute
 gases. Second, the two particles colliding are assumed to be
 uncorrelated before the collision. Third, external forces are assumed
 not to affect the collisions \cite{wolf-gladrow}. The equation is
-named after its father to the Boltzmann (transport) equation and reads:
+named after its father to the Boltzmann (transport) equation and
+reads:
 
 \begin{equation}\label{eq:lbm:boltzmann-eq}
 \partial_t f + \frac{\p}{m} \cdot \nabla_{\x}f + \frac{\F}{m} \cdot
-\nabla_{\ubf}f = Q(f, f)
+\nabla_{\mathbf{v}}f = Q(f, f)
 \end{equation}
 where $f$ is the distribution function for a single species collection
 of particles of mass $m$, $\F$ is external forces, $\p$ is momentum,
-$\nabla_{\x}$ and $\nabla_{\ubf}$ are the gradients in location and
-velocity space respectively. The rights hand side contains the so
+$\nabla_{\x}$ and $\nabla_{\mathbf{v}}$ are the gradients in location and
+velocity space respectively. The right-hand side contains the so
 called collision term which in the general case is expressed as an
-integral. However, in applications, it is usually approximated by some
-simpler expression.
+integral. 
+
+\begin{equation}
+Q(f, f) = \int \int
+\end{equation}
+
+This integral states how the distribution function changes after a two. However, the structure of this integral is in most physical
+situations too complicated to be used directly. Therefore, a number of
+simplifications have been proposed during the years.
+
+When designing these approximations, at least two main properties of
+the collision integral must be kept. \cite{wolf-gladrow}
+
+\begin{enumerate}
+  \item The same quantities that is conserved under collisions in the
+    collsion integral must also be conserved in the approximation.
+  \item Boltzmann's H-theorem must also be fulfilled for the
+    approximated collision operator.
+\end{enumerate}
+
+Without being to specific, the H-theorem states that the entropy
+computed from $f$ is always increasing with time and that the maximum
+entropy is obtained for a so called Maxwellian distribution in in
+momentum/velocity space. Boltzmann used an other quantity denoted by H
+closely related to entropy, thus the name of the theorem. The
+Maxwellian distribution in two dimensions that $f$ tends towards is
+given by
+
+\begin{equation}\label{eq:lbm:maxwell}
+f^{(M)}(\x, \mathbf{v}, t) = n \left ( \frac{m}{2 \pi k_B T} \right )
+\exp{\left( -\frac{m}{2 k_B T} (\mathbf{v} - \ubf)^2\right)}
+\end{equation} 
+where $\ubf$ is the mean velocity of the particles in the system and
+$n(\x)$ is the number of particles at location $\x$. In section
+\ref{sec:lbm:col}, one of the most widely used approximations of the
+collision integral will be presented.

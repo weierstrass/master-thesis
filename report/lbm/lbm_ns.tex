@@ -1,0 +1,100 @@
+\section{LBM for the incompressible Navier-Stokes}\label{sec:lbm:ns}
+The most frequent use of the LBM is to solve the Navier-Stokes
+equations. In this work only the incompressible case,
+eqs. \eqref{eq:et:ns_incompressible} and \eqref{eq:et:ns_mom} will be
+considered. The LBM may however be used to reproduce weak
+compressibility \cite{wolf-gladrow}. The incorporation of forces will
+be treated in section \ref{sec:lbm:forces}. We recall the
+incompressible Navier-Stokes equations without external forces present
+from chapter \ref{sec:et} as:
+
+\begin{equation}\label{eq:lbm:ns_inc}
+ \nabla \cdot \ubf = 0
+\end{equation}
+and
+
+\begin{equation}\label{eq:lbm:ns_mom}
+\rhorm \left (\dfrac{\partial \ubf}{\partial t} +
+  \ubf \cdot \nabla \ubf 
+  \right ) = - \nabla \Prm  + \rhorm \nu \nabla^2 \ubf
+\end{equation}
+where $\nu$ is the kinematic viscosity related through the
+dynamic viscosity, $\mu$, by
+
+\begin{equation}
+\mu = \rhorm \nu.
+\end{equation}
+
+A LBM will now be formulated for eqs. \eqref{eq:lbm:ns_inc} and
+\eqref{eq:lbm:ns_mom}. The LBE with a BGK collision operator is given
+by
+
+\begin{equation}
+f_i(\x + \cbf_i\delta_t, t + \delta_t) - f_i(\x, t) = -\omega \left[ f_i(\x, t) - f_i^{(eq)}(\x, t) \right]
+\end{equation}
+where
+
+\begin{equation}\label{eq:lbm:ns_eq}
+\feq = w_i\rho \left [ 1 + \frac{\ci \cdot \ubf}{c_s^2} +
+  \frac{(\ci \cdot \ubf)^2}{2c_s^4} - \frac{\ubf^2}{2c_s^2} \right]
+\end{equation}
+where $w_i$ are the weights in eq. \eqref{eq:lbm:weights}.
+
+The density, $\rhorm$, and the mass flux, $\rhorm \ubf$, is determined
+from $\fii$ by taking the zeroth and first moments respectively:
+
+\begin{equation}\label{eq:lbm:rho_mom}
+\rhorm = \sum_i \fii
+\end{equation}
+and
+\begin{equation}\label{eq:lbm:j_mom}
+\rhorm \ubf = \sum_i \fii \ci .
+\end{equation}
+The kinematic viscosity is related to the relaxation parameter,
+$\omega$
+
+\begin{equation}
+\nu = c_s^2\left( \frac{1}{\omega} - \frac{1}{2} \right).
+\end{equation}
+
+\subsection{Asymptotic analysis}\label{sec:lbm:asym_ns}
+Partially based on \cite{junk-asym}, an asymptotic analysis of the
+above suggested method will be performed. In most literature
+available, when reproducing the Navier-Stokes equations in the
+macroscopic limit, a Chapman-Enskog expansion is performed. Note that
+this is \emph{not} what is used here.
+
+From the expansion of $\fii$ in eq. \eqref{eq:lbm:fi_exp} follows the
+expansion of the macroscopic mass and velocity as
+
+\begin{equation}\label{eq:lbm:ns_rho_exp}
+\rho = \rhoe{0} + \ep\rhoe{1} + \ep^2\rhoe{2} + \ep^3\rhoe{3} +
+\bigO{\ep^4}
+\end{equation} 
+and
+
+\begin{equation}
+\ubf = \ue{0} + \ep\ue{1} + \ep^2\ue{2} + \ep^3\ue{3} + \bigO{\ep^4}.
+\end{equation}
+
+These expansions are plugged into the equilibrium distribution in
+eq. \eqref{eq:lbm:ns_eq} and from the equation of order zero in $\ep$,
+eq. \eqref{eq:lbm:ep0}section gives:
+
+\begin{equation}
+  \fie{0} = w_i \rhoe{0}
+\end{equation}
+Here $\ue{0}$ has been assumed to be zero by the same argumentation as
+in the Nernst-Planck analysis, section
+\ref{sec:lbm:asym_np}. Continuing to the equation of order 1 in $\ep$,
+eq. \eqref{eq:lbm:ep1} and taking the first moment gives
+
+\begin{equation}
+\nabla \rhoe{0} = 0
+\end{equation}
+
+
+
+\subsection{Forcing schemes}\label{sec:lbm:forces}
+how to add a ''forcing'' term in the method.
+

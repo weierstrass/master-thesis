@@ -1,61 +1,41 @@
-\section{The collision operator}\label{sec:lbm:col}
-The collision term in the LBE is basically what determines the physics
-of the system that is beeing modelled. Here the desired interaction of
-the pseudo particles is stated. In the continuous case with the
-Boltzmann equation, Boltzmann formulated a two particle (this was an
-assumption of his model) collision integral. However, the structure of
-this integral is in most physical situations too complicated to be
-used directly. Therefore, a number of simplifications have been
-proposed during the years. 
+\section{The BGK collision operator}\label{sec:lbm:col}
+The collision term in the LBE is the main ingredient in what
+determines the physics of the system that is beeing modelled. Here the
+desired interaction of the pseudo particles is stated. In section
+\ref{sec:lbm:stat}, two necessary properties to approximations of the
+full collsion integral was stated.
 
-\todo{consider writing the  integral explicitly...}
-
-When designing these approximations, at least two main properties of
-the collision integral must be kept. \cite{wolf-gladrow}
-
-\begin{enumerate}
-  \item The same quantities that is conserved under collisions in the
-    collsion integral must also be conserved in the approximation.
-  \item Boltzmann's H-theorem must also be fulfilled for the
-    approximated collision operator.
-\end{enumerate}
-
-Without being to specific, the H-theorem states that the entropy
-computed from $f$ is always increasing with time and that the maximum
-entropy is obtained for a so called Maxwellian distribution. Boltzmann
-used an other quantity denoted by H closely related to entropy, thus
-the name of the theorem. The Maxwellian distribution that $f$ tends
-towards is given by
-
-\begin{equation}\label{eq:lbm:maxwell}
-f^{(M)}(\x, \mathbf{v}, t) = n \left ( \frac{m}{2 \pi k_B T} \right )
-\exp{\left( -\frac{m}{2 k_B T} (\mathbf{v} - \ubf)^2\right)}
-\end{equation} 
-where $\ubf$ is the mean velocity of the particles in the
-system. 
-
-\subsection{The BGK operator}
 One of the simplest collision operators that fullfil conditions (1)
-and (2) is the BGK operator (BGK from its creators: Bhatnagar, Gross
-and Krook). It was proposed in 1954 and is today one of the most
-comonly used collision operators both in the case of the
-Lattice-Boltzmann and the continuous Boltzmann equation. It is based
-on the principle of relaxing $f$ towards a Maxwellian
-distribution. The relaxation is also performed in such a way that the
-collision invariants is preserved.  In the discrete case,
+and (2) in section \ref{sec:lbm:stat} is the BGK operator (BGK from
+its creators: Bhatnagar, Gross and Krook). It was proposed in 1954 and
+is today one of the most comonly used collision operators both in the
+case of the Lattice-Boltzmann and the continuous Boltzmann
+equation. It is based on the principle of relaxing $f$ towards a
+Maxwellian distribution. The relaxation is also performed in such a
+way that the collision invariants are preserved.  In the discrete case,
 eq. \eqref{eq:lbm:lbe} the operator is given by:
 
 \begin{equation}\label{eq:lbm:bgk}
-\Omega_i = -\omega \left[ f_i(\x, t) - f_i^{(eq)}(\x, t) \right]
+\Omega_{ij} = \Omega_i = -\omega \left[ f_i(\x, t) - f_i^{(eq)}(\x, t)
+  \right]
 \end{equation}
 where $\omega$ is a parameter determining the relaxation rate and
-$\feq$ should be of ``Maxwellian type'' int order to satisfy condition
-(2). In the discrete case, eq. \eqref{eq:lbm:maxwell} is taylor
-expanded around $\ubf = 0$ which gives an expression of the type
+$\feq$ should be an equilibrium distribution that makes sure that $f$
+satisfies the nescessary conditions. In the discrete case, a truncated
+expansion of eq. \eqref{eq:lbm:maxwell} is typically used
+\cite{wolf-gladrow}. This gives
+
 
 \begin{equation}
-\feq = w_i\rho \left [ 1 + ..........\right]
+\feq = w_i\rho \left [ 1 + \frac{\ci \cdot \ubf}{c_s^2} +
+  \frac{(\ci \cdot \ubf)^2}{2c_s^4} - \frac{\ubf^2}{2c_s^2} \right]
 \end{equation}
-where $\rho$ is the zeroth moment of $fi$.
+where $\rho$ is the zeroth moment of $\fii$ and $\ci$ is a unit
+velocity in the discretised velocity space. 
 
-\subsection{Other choices}
+The BGK operator is due to its simplicity both when it comes to
+theoretical treatment and implementation a popular choice. However in
+some physical situations, e.g. multi-phase or high Reynolds-number
+flows, more sophisticated alternatives are required
+\cite{wolf-gladrow}. Throughout this work, the BGK operator will be
+used.
