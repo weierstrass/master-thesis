@@ -1,14 +1,14 @@
 \section{The BGK collision operator}\label{sec:lbm:col}
 The collision term in the LBE is the main ingredient in what
-determines the physics of the system that is beeing modelled. Here the
+determines the physics of the system that is being modelled. Here the
 desired interaction of the pseudo particles is stated. In section
 \ref{sec:lbm:stat}, two necessary properties to approximations of the
-full collsion integral was stated.
+full collision integral was stated.
 
-One of the simplest collision operators that fullfil conditions (1)
+One of the simplest collision operators that fulfil conditions (1)
 and (2) in section \ref{sec:lbm:stat} is the BGK operator (BGK from
 its creators: Bhatnagar, Gross and Krook). It was proposed in 1954 and
-is today one of the most comonly used collision operators both in the
+is today one of the most commonly used collision operators both in the
 case of the Lattice-Boltzmann and the continuous Boltzmann
 equation. It is based on the principle of relaxing $f$ towards a
 Maxwellian distribution. The relaxation is also performed in such a
@@ -20,18 +20,19 @@ eq. \eqref{eq:lbm:lbe} the operator is given by:
   \right]
 \end{equation}
 where $\omega$ is a parameter determining the relaxation rate and
-$\feq$ should be an equilibrium distribution that makes sure that $f$
-satisfies the nescessary conditions. In the discrete case, a truncated
+$\feq$ should be an equilibrium distribution that makes sure that the
+necessary conditions are fulfilled. In the discrete case, a truncated
 expansion of eq. \eqref{eq:lbm:maxwell} is typically used
-\cite{wolf-gladrow}. This gives
+\cite{wolf-gladrow}. This gives for instance
 
 
 \begin{equation}
 \feq = w_i\rho \left [ 1 + \frac{\ci \cdot \ubf}{c_s^2} +
   \frac{(\ci \cdot \ubf)^2}{2c_s^4} - \frac{\ubf^2}{2c_s^2} \right]
 \end{equation}
-where $\rho$ is the zeroth moment of $\fii$ and $\ci$ is a unit
-velocity in the discretised velocity space. 
+where $w_i$ is a lattice specific weight, $\rho$ is the zeroth moment
+of $\fii$ and $\ci$ is a unit velocity in the discretised velocity
+space.
 
 The BGK operator is due to its simplicity both when it comes to
 theoretical treatment and implementation a popular choice. However in

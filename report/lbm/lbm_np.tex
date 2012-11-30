@@ -38,7 +38,7 @@ density and charge flux density is obtained by taking the zeroth and
 first moments of the distribution function respectively, i.e:
 
 \begin{equation}\label{eq:lbm:rho_mom}
-\rho = \sum_i \fii
+\rhorm = \sum_i \fii
 \end{equation}
 and
 \begin{equation}\label{eq:lbm:j_mom}
@@ -48,7 +48,7 @@ The diffusion constant, $D$, is related to the relaxation parameter
 $\omega$ through 
 
 \begin{equation}\label{eq:lbm:np_D}
-D = c_s^2 \left( \frac{1}{2} - \frac{1}{\omega} \right).
+D = c_s^2 \left( \frac{1}{\omega} - \frac{1}{2} \right).
 \end{equation}
 
 \subsection{Asymptotic analysis}\label{sec:lbm:asym_np}
@@ -56,8 +56,7 @@ To motivate the appearance of the above suggested method for solving
 eq. \eqref{eq:lbm:adv-dif} and for showing under what premises the
 method is valid, the macroscopic limit of the discrete scheme will now
 be analysed in an asymptotic manner. Note that for the advection
-diffusion equation mass will be conserved but flux will not be
-conserved.
+diffusion equation mass is but flux is not conserved.
 
 From the expansion of $\fii$ in eq. \eqref{eq:lbm:fi_exp} and from
 eqs. \eqref{eq:lbm:rho_mom} and \eqref{eq:lbm:j_mom} follow the

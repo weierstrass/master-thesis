@@ -15,11 +15,15 @@ eq. \eqref{eq:lbm:boltzmann-eq} for the distribution functions from
 which the macroscopic quantities then are determined. Both the spatial
 positions and the velocity space is discretised allowing the
 distributions to ``sit'' only at certain positions and to stream to
-neighbouring locations only in certain directions. Usually in two
-dimensions the velocity space is discretised into 9 distinct
-velocities, more about the choice of lattice is discussed in section
-\ref{sec:lbm:lattice}. In this case 9 distribution functions are
-needed per node which might correspond to one or two macroscopic
+neighbouring locations only in certain directions. A naive way to
+visualise the evolution of $f$ is to consider the distribution
+functions at the lattice nodes as pseudo particles that move along the
+lattice and collide.
+
+Usually in two dimensions the velocity space is discretised into 9
+distinct velocities, more about the choice of lattice is discussed in
+section \ref{sec:lbm:lattice}. In this case 9 distribution functions
+are needed per node which might correspond to one or two macroscopic
 variables but is indeed fewer than the number of variables needed for
 a microscopic approach.
 
@@ -32,9 +36,9 @@ f_i(\x + \cbf_i\delta_t, t + \delta_t) - f_i(\x, t) = \Omega_{ij}(\x, t)
 \end{equation}
 where $f_i$ denotes the distribution function for direction $\cbf_i$,
 $\delta_t$ is the time step and $\Omega_i$ is the (for now
-non-specified) collision operator. An implicit sum over the $j$ index
-i assumed. Various forms of collision operators exist and will be
-further discussed in section \ref{sec:lbm:col}.
+non-specified) collision operator. An implicit sum over the second
+velocity index $j$ is assumed. Various forms of collision operators
+exist and will be further discussed in section \ref{sec:lbm:col}.
 
 \subsection{Computational algorithm}
 In order to solve eq. \eqref{eq:lbm:lbe} the distribution functions
@@ -46,19 +50,19 @@ sections of this chapter.
 When a proper initialisation has been performed, the time evolution of
 the distribution functions is determined iteratively by the explicit
 scheme in the LBE, eq. \eqref{eq:lbm:lbe}. The update in each time
-step is usually divided into two computational tasks. First is the new
-value that later will be propagated to a neighbouring node computed,
+step is usually divided into two computational tasks. First, the new
+value that later will be propagated to a neighbouring node is computed,
 i.e.
 
 \begin{equation}
-f_i(\x, t + \delta_t) = f_i(\x, t) + \Omega_{ij}(\x, t)
+f_i^{*}(\x, t + \delta_t) = f_i(\x, t) + \Omega_{ij}(\x, t)
 \end{equation}
 This step will be referred to as the collision step since it is here
 the ``collision'' is computed. The second step consists of propagating
 the distribution functions to the neighbouring node in its
 corresponding direction, i.e.
 \begin{equation}
-f_i(\x + \cbf_i\delta_t, t + \delta_t) = f_i(\x, t + \delta_t)
+f_i(\x + \cbf_i\delta_t, t + \delta_t) = f_i^*(\x, t + \delta_t)
 \end{equation}
 This step will be referred to as the streaming step.
 
@@ -70,7 +74,7 @@ boundary conditions in section \ref{sec:lbm:bound}. Thus, at each time
 step, the boundary conditions must also be handled. 
 
 This is broadly the whole computational algorithm behind the LBM, in
-fig. \ref{fig:lbm:algo} is a flow scheme of the algorithm is shown.
+fig. \ref{fig:lbm:algo}, a flow scheme of the algorithm is shown.
 
 \begin{figure}
 \begin{center}

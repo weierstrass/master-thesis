@@ -53,7 +53,7 @@ and
 The kinematic viscosity is related to the relaxation parameter,
 $\omega$
 
-\begin{equation}
+\begin{equation}\label{eq:lbm:nu}
 \nu = c_s^2\left( \frac{1}{\omega} - \frac{1}{2} \right).
 \end{equation}
 
@@ -62,7 +62,7 @@ Partially based on \cite{junk-asym}, an asymptotic analysis of the
 above suggested method will be performed. In most literature
 available, when reproducing the Navier-Stokes equations in the
 macroscopic limit, a Chapman-Enskog expansion is performed. Note that
-this is \emph{not} what is used here.
+this is \emph{not} what is done here.
 
 From the expansion of $\fii$ in eq. \eqref{eq:lbm:fi_exp} follows the
 expansion of the macroscopic mass and velocity as
@@ -89,12 +89,162 @@ in the Nernst-Planck analysis, section
 \ref{sec:lbm:asym_np}. Continuing to the equation of order 1 in $\ep$,
 eq. \eqref{eq:lbm:ep1} and taking the first moment gives
 
-\begin{equation}
-\nabla \rhoe{0} = 0
+\begin{equation}\label{eq:lbm:ns_rhoe0}
+\nabla \rhoe{0} = 0.
 \end{equation}
+Further, by using this fact that $\rhoe{0}$ is constant in space and
+that
 
+\begin{equation}
+\fie{1} = - \frac{1}{\omega} \pd\fie{0} + \feqe{1}
+\end{equation}
+where
 
+\begin{equation}
+\feqe{1} = w_i\left[ \rhoe{1} + \rhoe{0}\frac{\ci \cdot \ue{1}}{c_s^2}
+  \right]
+\end{equation}
+gives when taking the zeroth moment of the equation of order two in $\ep$,
+eq. \eqref{eq:lbm:ep2}
+
+\begin{equation}
+\partial_t \rhoe{0} + \nabla \cdot (\rhoe{0} \ue{1}) = 0.
+\end{equation}
+This equation states the conservation of mass for $\rhoe{0}$. Since
+we are considering only systems in the incompressible limit,
+$\rhoe{0}$ will be assumed to also be constant in time and we have
+
+\begin{equation}\label{eq:lbm:ns_nodivu}
+\nabla \cdot \ue{1} = 0.
+\end{equation}
+Taking the first moment of eq. \ref{eq:lbm:ep2} gives 
+
+\begin{equation}\label{eq:lbm:ns_rhoe1}
+\nabla \rhoe{1} = 0.
+\end{equation}
+It can be showed \cite{junk-asym} that if $\rhoe{1}$ is initialised
+properly, then it does not change in time. Therefore, if $\rhoe{1}$ is
+initialised to zero, it will also remain zero for all time.
+
+As we now continue to the equation of order three in $\ep$, things
+will get a bit more technical as we will make use of the fourth order lattice isotropy, eq. \eqref{eq:lbm:i4}. The zeroth moment of the equation gives
+
+\begin{equation}
+\nabla \cdot \ue{2} = 0.
+\end{equation}
+which may be used to show that $\ue{2} = 0$ \cite{junk-asym}, it will
+not be shown here. Instead we continue by taking the first moment of
+the equation, as it gets a bit more technical now, some intermediate
+steps in the calculation will explicitly be written out. First from
+the equation of order two in $\ep$ we have that
+
+\begin{equation}
+\fie{2} = -\frac{1}{\omega} \pd \fie{1} - \frac{1}{\omega} \partial_t
+\fie{0} - \frac{1}{2\omega} (\pd \fie{0})^2 + \feqe{2}
+\end{equation}
+where
+
+\begin{equation}
+\feqe{2} = w_i \left[ \rhoe{2} + \rhoe{0} \frac{(\ci \cdot
+    \ue{1})^2}{2c_s^4} - \rhoe{0} \frac{\left(\ue{1}\right)^2}{2c_s^2} \right]
+\end{equation}
+where the fact that $\ue{2} = 0$ have been used. Inserting the
+expression for $\fie{2}$ into eq. \eqref{eq:lbm:ep3} gives, in index
+notation
+
+\begin{equation}\label{eq:lbm:foo1}
+\begin{aligned}
+\cc{\alpha}\cc{\beta}\parti{\beta} \left[ - \frac{\rhoe{0}}{\omega
+    c_s^2} \cc{\gamma}\parti{\gamma}\cc{\delta} \uc{\delta} +
+  w_i\rhoe{2} +
+  \frac{\rhoe{0}w_i}{2c_s^4}\left(\cc{\gamma}\cc{\delta}\uc{\gamma}\uc{\delta}
+  - (\uc{})^2 \right) \right] + \\ + \partial_tw_i\rhoe{0}\uc{\alpha} +
+\frac{\rhoe{0}}{2 c_s^2}
+\cc{\alpha}\cc{\beta}\parti{\beta}\cc{\gamma}\parti{\gamma}\cc{\delta}
+= 0
+\end{aligned}
+\end{equation}
+For brevity, the terms that in the end will equal zero have been
+omitted. The indices $\alpha, \beta, \gamma$ and $\delta$ may take the
+$x$ or $y$ component respectively. Summing eq. \eqref{eq:lbm:foo1}
+over the directional index $i$ and by using the isotropity properties
+of the lattice, eq. \eqref{eq:lbm:i0} gives:
+
+\begin{equation}\label{eq:lbm:dino}
+\begin{aligned}
+c_s^2\rhoe{0}\left( \frac{1}{2} - \frac{1}{\omega}
+\right)\parti{\beta} \left( \deltasec \right) + c_s^2\parti{\beta}\dab
+\rhoe{2} +\\ + \frac{\rhoe{0}}{2}\left(( \deltasec) \uc{\gamma}\uc{\delta} -
+\dd{\alpha}{\beta}(\uc{})^2 \right) + \rhoe{0}\partial_t \uc{\alpha} = 0
+\end{aligned}
+\end{equation}
+On the form it is written now, it is not totally clear whether the
+above equation is the incompressible Navier-Stokes momentum equation
+or not. A simplification is in order and for brevity only the
+simplification of one term is shown here.
+
+By noting that $(\uc{})^2$ may be written as
+$\dd{\gamma}{\delta}\uc{\gamma}\uc{\delta}$ we have
+
+\begin{equation}
+\begin{aligned}
+ \parti{\beta}\left[ (\deltasec) \uc{\gamma}\uc{\delta} - \dd{\alpha}{\beta}(\uc{})^2\right] =
+  \\ =\parti{\beta}\left[(\dd{\alpha}{\beta}\dd{\gamma}{\delta}+
+  \dd{\alpha}{\gamma}\dd{\beta}{\delta})\uc{\gamma}\uc{\delta}\right]
+\end{aligned}
+\end{equation}
+and by summing over $\gamma$ and $\delta$ the above expression reduces
+to:
+
+\begin{equation}
+\parti{\beta} \left[ \uc{\alpha}\uc{\beta} + \uc{\beta}\uc{\alpha}
+  \right] = 2\parti{\beta}\uc{\alpha}\uc{\beta} 
+\end{equation}
+and from incompressibility ($\parti{\beta}\uc{\beta} = 0$),
+eq. \eqref{eq:lbm:ns_nodivu} we end up with
+
+\begin{equation}
+2\uc{\beta}\parti{\beta}\uc{\alpha}.
+\end{equation}
+By analogous simplification of the remaining terms in
+eq. \eqref{eq:lbm:dino} we get
+
+\begin{equation}\label{eq:lbm:ns_mom_index}
+\rhoe{0} \left( \partial_t \uc{\alpha} +
+\uc{\beta}\parti{\beta}\uc{\alpha} \right) = -\parti{\beta}(c_s^2
+\rhoe{2}) + \rhoe{0}\nu \parti{\beta} \left( \parti{\beta}\uc{\alpha} +
+\parti{\alpha}\uc{\beta} \right)
+\end{equation}
+where $\nu$ is defined as in eq. \eqref{eq:lbm:nu}, and if the
+quantity $c_s^2\rhoe{2}$ is interpreted as the pressure, the above
+equation is indeed the incompressible Navier-Stokes momentum equation,
+eq. \eqref{eq:lbm:ns_mom}. It is satisfied by $\ue{1}$ in the
+expansion of $\ubf$, since $\ue{2} = 0$, the error will be of order
+$\ep^3$ and we say that the LB formulation is of second order accuracy
+in velocity. $\rhoe{0}$ satisfies the mass equation and since
+$\rhoe{1} = 0$ we say that the method is second order in density as
+well \cite{junk-asym}. Since the pressure is included as a term in the
+density expansion, problems with keeping the incompressibility might
+arise if large enough pressures are present.
 
 \subsection{Forcing schemes}\label{sec:lbm:forces}
-how to add a ''forcing'' term in the method.
+Several methods have been proposed to add the forcing term in
+eq. \eqref{eq:et:ns_mom} to the LBE. In \cite{krafczyk} five of these
+methods have been compared. To briefly summarise the article, for
+single phase flows, the methods achieve comparable. 
 
+Due to its simplicity, a method formulated by Shan and Chen
+\cite{shan-chen} was used in this work. It consists of modifying the
+equilibrium distribution by computing it with the modified velocity
+
+\begin{equation}
+\ubf^{(eq)} = \frac{1}{\rho}\left(\sum_i \fii \ci +
+\frac{\F\delta_t}{\omega} \right)
+\end{equation}
+where $\F$ is the external force. The physical velocity, $\ubf$, is
+computed by
+
+\begin{equation}
+\ubf = \frac{1}{\rho}\left(\sum_i \fii \ci +
+\frac{\F\delta_t}{2} \right).
+\end{equation} 
