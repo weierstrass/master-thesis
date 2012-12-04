@@ -66,7 +66,7 @@ comparable with previous works, e.g. \cite{junk-asym}.
 \includegraphics[width=0.9\textwidth]{fig/taylor_uy.pdf}
 \end{center}
 \caption{1D section of the decaying Taylor-Green flow. The $y$
-  component of the velocity is plotted at $y = 0$. Computed solutions
+  component of the velocity is plotted at $y = \pi$. Computed solutions
   ($\times$) are compared with analytical (solid) at two different
   times $t = t_0$ and $t = t_{1/2}$. A domain of $100\times100$ nodes
   were used.}
@@ -74,13 +74,30 @@ comparable with previous works, e.g. \cite{junk-asym}.
 \end{figure}
 
 \subsection{Four rows mill}\label{sec:mb:four_rows}
+In the decaying Taylor-Green case, the time derivative term in
+Navier-Stokes momentum equation is balanced by the viscous term. We
+now wish to compensate for the decay by introducing a force. In a
+steady state situation, $\partial_t\ubf = 0$ and the force must
+balance the viscous term. The force is therefore chosen as
+
+\begin{equation}
+\begin{aligned}
+F_x(\x, t) &= \nu(a^2 + b^2)u_x(\x, t) \\
+F_y(\x, t) &= \nu(a^2 + b^2)u_y(\x, t) 
+\end{aligned}
+\end{equation}
+where $u_x$ and $u_y$ are velocities from eq. \eqref{eq:mb:tv}. Using
+the same parameters, initialisation and domain as in the decaying
+case, no decay is observed. In fig. \ref{fig:mb:four_mill}, a section
+of the $y$ component of the velocity is shown at $t = t_{1/2}$.
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=0.9\textwidth]{fig/four_mill.pdf}
 \end{center}
-\caption{1D section of the steady four mills flow. An external force
-  have been included to }
+\caption{1D section of the steady four rows mills flow at $t =
+  t_{1/2}$. An external force have been included to compensate the
+  decay (dashed). The $y$ component is plotted for $y = \pi$. }
 \label{fig:mb:four_mill}
 \end{figure}
 
