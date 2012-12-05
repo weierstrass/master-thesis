@@ -1,10 +1,10 @@
 \section{Taylor-Green vortex}
 A more sophisticated system than the Poisseuille flow is the decaying
 Taylor-Green vortex flow. Also this system is one of the few where an
-analytical solution to Navier-Stokes is possible to find. In this
-section, the Taylor-Green flow is used to benchmark the 2D LBM
-proposed in section \ref{sec:lbm:ns}. The force implementation is also
-tested in 2D in section \ref{sec:mb:four_rows}. 
+analytical solution to the Navier-Stokes equation is possible to
+find. In this section, the Taylor-Green flow is used to benchmark the
+2D LBM proposed in section \ref{sec:lbm:ns}. A 2D test of the force
+implementation is also carried out in section \ref{sec:mb:four_rows}.
 
 The Taylor-Green vortex flow in two dimensions is defined by the
 following pressure and velocity fields \cite{junk-asym}:
@@ -23,10 +23,10 @@ where $\nu$ is the viscosity, $\x\in[0, 2\pi]^2$ and $a$ and $b$ are
 two real constants. It is straight-forward to verify that these
 quantities satisfy the incompressible Navier-Stokes,
 eqs. \eqref{eq:et:ns_incompressible} and \eqref{eq:et:ns_mom}. The
-constants $a$ and $b$ is chosen as $a = b = 2\pi/N$ where $N = N_x =
+constants $a$ and $b$ are chosen as $a = b = 2\pi/N$ where $N = N_x =
 N_y = 100$ is the grid resolution. This particular choice of $a$ and
 $b$ allows us to use lattice units with $\delta_x = \delta_t = 1$ in
-the simulation. The maximum velocity in the vortex at $t_0$ is chosen
+the simulation. The maximum velocity in the vortex at $t = 0$ is chosen
 as $u_0 = 1/a = 1/b$.
 
 The simulation is performed with $\nu = 0.05$ l.u. on a $100\times100$
@@ -68,16 +68,16 @@ comparable with previous works, e.g. \cite{junk-asym}.
 \caption{1D section of the decaying Taylor-Green flow. The $y$
   component of the velocity is plotted at $y = \pi$. Computed solutions
   ($\times$) are compared with analytical (solid) at two different
-  times $t = t_0$ and $t = t_{1/2}$. A domain of $100\times100$ nodes
+  times $t = 0$ and $t = t_{1/2}$. A domain of $100\times100$ nodes
   were used.}
 \label{fig:mb:tg_uy}
 \end{figure}
 
 \subsection{Four rows mill}\label{sec:mb:four_rows}
-In the decaying Taylor-Green case, the time derivative term in
+In the decaying Taylor-Green flow, the time derivative term in
 Navier-Stokes momentum equation is balanced by the viscous term. We
 now wish to compensate for the decay by introducing a force. In a
-steady state situation, $\partial_t\ubf = 0$ and the force must
+steady state situation: $\partial_t\ubf = 0$ and the force must
 balance the viscous term. The force is therefore chosen as
 
 \begin{equation}
@@ -86,10 +86,11 @@ F_x(\x, t) &= \nu(a^2 + b^2)u_x(\x, t) \\
 F_y(\x, t) &= \nu(a^2 + b^2)u_y(\x, t) 
 \end{aligned}
 \end{equation}
-where $u_x$ and $u_y$ are velocities from eq. \eqref{eq:mb:tv}. Using
-the same parameters, initialisation and domain as in the decaying
-case, no decay is observed. In fig. \ref{fig:mb:four_mill}, a section
-of the $y$ component of the velocity is shown at $t = t_{1/2}$.
+where $u_x$ and $u_y$ are the velocities from
+eq. \eqref{eq:mb:tv}. Using the same parameters, initialisation and
+domain as in the decaying case, no decay is observed. In
+fig. \ref{fig:mb:four_mill}, a section of the $y$ component of the
+velocity is shown at $t = t_{1/2}$.
 
 \begin{figure}
 \begin{center}
@@ -97,7 +98,9 @@ of the $y$ component of the velocity is shown at $t = t_{1/2}$.
 \end{center}
 \caption{1D section of the steady four rows mills flow at $t =
   t_{1/2}$. An external force have been included to compensate the
-  decay (dashed). The $y$ component is plotted for $y = \pi$. }
+  decay (dashed). The $y$ component is plotted for $y = \pi$. We
+  observe no decay as the computed solution ($\times$) and the initial
+  velocity (solid) coincide.}
 \label{fig:mb:four_mill}
 \end{figure}
 

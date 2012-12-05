@@ -22,21 +22,21 @@ The analytical solution to eq. \eqref{eq:mb:helmholtz} with the given
 boundary conditions is \cite{chai_poi}:
 
 \begin{equation}
-\psirm(x, y) = cos\pi x \frac{\sinh\sqrt{\lambda^2 + \pi^2}(1 -
+\psirm(x, y) = \cos\pi x \frac{\sinh\sqrt{\lambda^2 + \pi^2}(1 -
   y)}{\sinh\sqrt{\lambda^2 + \pi^2}}.
 \end{equation}
 
-A grid of $n_x\times n_y = 65\times65$ nodes was used when computing the LBM
+A grid of $65\times65$ nodes was used when computing the LBM
 solution. The computational domain was rescaled to the desired one by
 setting $\delta_x = 1/(n_x-1) = 1/64$ and $\delta_t = \delta_x^2$. An
 other possibility would have been to rescale the parameter $\lambda$
 and have $\delta_x = \delta_t = 1$.
 
-The boundary conditions in eq. \eqref{eq_mb_helm_bdry} was implemented
-using the He/Zou approach described in section \ref{sce:lbm:hezou}. A
+The boundary conditions in eq. \eqref{eq:mb:helm_bdry} was implemented
+using the He/Zou approach described in section \ref{sec:lbm:hezou}. A
 bounce back approach with some momentum addition would also have been
 possible but was not chosen due to that the actual boundary location
-is not at the node location, but half a node-node distance into the
+is then not at the node location, but half a node-node distance into the
 computational domain. Also the bounce-back implementation is
 previously tested. 
 

@@ -18,49 +18,48 @@ reduces to an equation for the $x$ component of the velocity
 
 \begin{equation}
 \dfrac{\partial \ux}{\partial t} - \ux \dfrac{\partial \ux}{\partial
-  x} = \frac{1}{\Rerm} \dfrac{\partial^2 \ux}{\partial y^2} -
+  x} = \nu \dfrac{\partial^2 \ux}{\partial y^2} -
 \dfrac{\partial \Prm}{\partial x}.
 \end{equation}
  
-Under the assumption of a system in a steady state, i.e. ${\partial
+Under the assumption of a system in steady state, i.e. ${\partial
   \ux}/{\partial t} = 0$. Further if the flow is fully developed
-${\partial \ux}/{\partial x} = 0$, this also folloes from
+${\partial \ux}/{\partial x} = 0$, this also follows from
 \eqref{eq:lbm:ns_inc}. We now have together
-with writing the constant pressure gradient as $\Delta \Prm/l$
+with writing the constant pressure gradient as $\Delta \Prm/l$:
 
 \begin{equation}
 \dfrac{\partial^2 \ux}{\partial y^2} =
-\dfrac{\Rerm\; \Delta\Prm}{l}.
+\dfrac{\Delta\Prm}{\nu l}.
 \end{equation}
 
-Solving this eq. with no slip boundary conditions, $\ux(0) = \ux(H) =
+Solving this equation with no slip boundary conditions, $\ux(0) = \ux(H) =
 0$ gives an expression of the velocity profile
 
 \begin{equation}\label{eq:mb:ana_poi}
-\ux(y) = \dfrac{\Rerm\; \Delta\Prm}{2l}y(y - H).
+\ux(y) = \dfrac{\Delta\Prm}{2\nu l}y(y - H).
 \end{equation}
 
-The benchmark of the LBM solver of the NS equation described in
-section \ref{sec:lbm:ns} is performed with a pressure gradient
-incorporated as a force. Other possibilities would be to drive the
-fluid by imposing fixed pressures/velocities at the inlet and outlet.
-In this case, with a driving force, periodic boundary conditions are
-imposed at the inlet and outlet. At the channel walls, the bounce-back
-boundary condition described in section \ref{sec:lbm:bb} is used. The
-actual boundary will then be located half a node-node distance into
-the fluid.
+In this benchmark, the pressure gradient is incorporated as a
+force. Other possibilities would be to drive the fluid by imposing
+fixed pressures/velocities at the inlet and outlet.  In this case,
+with a driving force, periodic boundary conditions are imposed at the
+inlet and outlet. At the channel walls, the bounce-back boundary
+condition described in section \ref{sec:lbm:bb} is used. The actual
+boundary will then be located half a node-node distance into the
+fluid.
 
-A grid with 50 nodes across the channel and 3 in the flow direction
-is used. The driving force is set to $\Delta \Prm / l = 1\cdot 10^{-4}$ and
-the Reynolds number to $\Rerm = l_0 u_0/\nu$ where the viscosity
-is $\nu = 0.2778$ from eq. \eqref{eq:lbm:nu} with relaxation parameter $\omega = 0.75$ and
-$l_0 = u_0 = 1$. The solution that was obtained after 20000
-iterations is presented in fig. \ref{fig:mb:poi}. The analytical
-solution, eq. \eqref{eq:mb:ana_poi}, is plotted for comparison.
+A grid with 50 nodes across the channel and 3 in the flow direction is
+used. The driving force is set to $\Delta \Prm / l = 1\cdot 10^{-4}$
+and the viscosity is $\nu = 0.2778$ from eq. \eqref{eq:lbm:nu} with
+relaxation parameter $\omega = 0.75$. The solution that was obtained
+after 20000 iterations is presented in fig. \ref{fig:mb:poi}. The
+analytical solution, eq. \eqref{eq:mb:ana_poi}, is plotted for
+comparison.
 
 The agreement between computed and analytical solution is
-satisfying. With an RMS error of 9.271$\cdot 10^{-5}$ l.u. and maximum
-absolute error of 1.198$\cdot10^{-4}$ l.u.. Note that the actual boundary
+satisfying. With an RMS error of 9.271$\cdot 10^{-5}$ l.u. and a maximum
+absolute error of 1.198$\cdot10^{-4}$ l.u. Note that the actual boundary
 is located half a node-node distance into the computational domain,
 this is due to the implementation of the bounce-back scheme, see
 section \ref{sec:lbm:bb}.  
