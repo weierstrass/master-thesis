@@ -1,0 +1,10 @@
+\section{Algorithm/Scheme for solving the coupled equations}
+the iterative scheme used.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.4\textwidth]{fig/full_algorithm.pdf}
+\end{center}
+\caption{Flow scheme of the algorithm for solving the coupled equations.}
+\label{fig:lbm:full_algo}
+\end{figure}
