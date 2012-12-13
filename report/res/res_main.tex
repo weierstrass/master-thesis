@@ -1,7 +1,15 @@
-\chapter{Modelling of electrokinetic flow}
-kcl ref to appendix...
+\chapter{Modelling of electrokinetic flow}\label{sec:res}
+In this chapter, results of modelling of electrokinetic flow using the
+previously described lattice-Boltzmann method are presented. The
+choice of systems is done with focus on those where the
+Poisson-Boltzmann approach is not applicable. First simple 1D systems
+in channels are considered, then more complicated systems in 2D. All
+results presented here are for systems in steady state. The liquid
+used in the modelling is a KCl solution defined by the parameters in
+tab. \ref{tab:res:param}.
+
 \begin{table}
-  \caption{Physical parameters of a KCl ion solution that is modelled
+  \caption{Physical parameters of the KCl ion solution that is modelled
     in this chapter. Parameters are from \cite{dongquing-ren-book}. }
 \begin{center}
     \begin{tabular}{ | r | l |}
@@ -18,37 +26,12 @@ kcl ref to appendix...
 \label{tab:res:param}
 \end{table}
 
-\section{Charge concentration and potential in 1D system}
-section in the channel, + debye-huckel comparision
+\input{res/res_channel}
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=0.9\textwidth]{fig/potential_1d.pdf}
-\end{center}
-\caption{Computed electric potential across a channel of width $d = 10
-  \mu$m. The solution in the channel is a KCl solution defined by
-  parameters in table \ref{tab:res:param}. The channel walls are
-  negatively charged. Note that $\Vnil$ is negative.}
-\label{fig:res:pot_1d}
-\end{figure}
+\input{res/res_electrovis}
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=0.9\textwidth]{fig/charge_1d.pdf}
-\end{center}
-\caption{Computed positive (solid) and negative (dashed) charge
-  distribution across a channel of width $d = 10 \mu$m. The solution
-  in the channel is a KCl solution defined by parameters in table
-  \ref{tab:res:param}. The channel walls are negatively charged.}
-\label{fig:res:c_1d}
-\end{figure}
+\input{res/res_electroosmos}
 
-\subsection{Nernst-Planck vs. Poisson-Boltzmann}
+\input{res/res_hetro}
 
-\section{Electroviscous effect}
-
-\section{Electroosmotic flow}
-NP + PB differences?
-\section{Flow in channel with heterogeneously charged walls}
-
-\section{Flow in array of charged squares}
+\input{res/res_square}

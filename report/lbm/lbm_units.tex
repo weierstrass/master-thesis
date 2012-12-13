@@ -1,0 +1,37 @@
+\section{Physical and lattice units}
+
+A physical system may in its physical units contain quantities whose
+numerical values may differ a lot from each other. It is therefore,
+from a numerical point of view, a very bad idea and in the case with
+lattice-Boltzmann it will in general not work to just solve the
+equation in physical units. The equation is therefore scaled to
+dimensionless form by introducing characteristic quantities. For
+example a quantity A is scaled by A$_0$ to a dimensionless quantity
+A$'$ through
+
+\begin{equation}
+\mathrm{A}' = \mathrm{A}/\mathrm{A_0} 
+\end{equation}
+Usually the dimensionless quantities are wanted to be of order one.
+
+In the case with Navier-Stokes equation, three characteristic
+quantities are needed to put it on dimensionless form. I.e. one for
+the density ($\rho_0$), velocity ($u_0$) and length ($\ell_0$). The
+non-dimensional incompressible N-S will contain one dimensionless
+parameter, i.e. the Reynolds number $\Rerm = \rho_0 u_0 \ell_0 / \mu$.
+
+For the advection-diffusion equation, in addition to a characteristic
+length and velocity, a characteristic concentration ($\C_0$) is
+needed. One dimensionless parameter arise when non-dimensionalising the
+equation, i.e. the Peclet number, $\Pe = u_0\ell_0/D$ where $D$ is the
+diffusion coefficient. 
+
+Poisson's equation is non-dimensionalised by using a length and a
+characteristic voltage ($V_0$). The RHS then gets multiplied by factor
+$\ell_0^2/V_0$ in the non-dimensional form.
+
+When the non-dimensional form of the equations are determined, the
+domain is discretised. The non-dimensional length of the system is now
+typically 1 and $\delta_x = 1/N$ where $N$ is the number of lattice
+cells used. From the diffusive scaling used, $\delta_t = \delta_x^2$
+is usually a good choice.  

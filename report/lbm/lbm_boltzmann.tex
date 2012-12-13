@@ -1,5 +1,5 @@
 \section{Statistical background}\label{sec:lbm:stat}
-Consider one litre of air. At NTP, the volume will contain in the
+Consider one litre of air. At STP, the volume will contain in the
 order of $10^{22}$ molecules. In order to model this system
 microscopically, 6 variables per molecule will be needed to describe
 the microstate of the system. Just to store the state of the system in
@@ -8,19 +8,20 @@ whole world wide web times one million \cite{wolfram-alpha-web}. Thus,
 for these kind of systems, the microscopic approach is somewhat
 impractical.
 
-For that reason, statistical approaches have been developed for these
-kind of problems. A fundamental quantity used for describing the
-system is a continuous probability density distribution, $f$. This
-distribution may be regarded as an average over the
-microstates. Consider a volume of $d^3\x d^3\mathbf{p}$ in phase
-space, the number of molecules, $dN$ in this volume is then given
-through the density distribution, $f$ as
+\nomenclature{STP}{Standard Temperature and Pressure}
+
+Statistical approaches have been developed for these types of
+problems. A fundamental quantity used for describing the system is a
+continuous probability density distribution, $f$. This distribution
+may be regarded as an average over the microstates. Consider a volume
+of $d^3\x d^3\mathbf{p}$ in phase space, the number of molecules, $dN$
+in this volume is then given through the density distribution, $f$ as
 
 \begin{equation}
 dN(\x, \p, t) = f(\x, \p, t)\drm^3\x \drm^3\p.
 \end{equation}
 Thus $f(\x, \p, t)$ is a measure for the number of particles at
-location $\x$ with momentum $\p$ at time $t$. Macroscopic variables is
+location $\x$ with momentum $\p$ and at time $t$. Macroscopic variables are
 obtained by summing, e.g. the particle density, $n$, is obtained from
 
 \begin{equation}

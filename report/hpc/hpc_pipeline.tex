@@ -1,0 +1,77 @@
+\section{The pipeline}
+To execute an instruction, several parts of the hardware is typically
+involved. The basic idea of pipelining is to allow these different
+parts of hardware to operate simultaneously. For example at the same
+time as an instruction is executed the instruction that will be
+executed in the next clock cycle may be decoded. In principle all
+modern computer architectures are pipelined.
+
+The x86 architecture is a CISC (Complex instruction set computing)
+arcitecture which means that it consists of a rather large number of
+specific instructions. The opposite case is a RISC (Reduced
+instruction set computing) architecture that only has a very few but
+general instructions. Due to the pipelining, an important property of
+RISC is that the instructions execute in one clock cycle great
+performance benefit of the RISC architectures. The modern CISC
+architectures is however said to be RISC-like and has also the ability
+of pipelining. Since The CISC pipelining is rather complicated,
+e.g. the Intel Xeon processor in the computer that this text is
+written on has a 20 stage pipeline \cite{intel-xeon}. The principle is
+however the same as in the RISC case, therefore a brief explanation of
+the classical RISC pipeline is given here. The RISC pipeline consists
+of the following 5 stages:
+
+\begin{enumerate}
+  \item Fetch of instruction 
+  \item Decoding of fetched instruction
+  \item Execution of instruction
+  \item Memory access
+  \item Write result to register
+\end{enumerate}
+
+Each of these tasks takes one clock cycle to perform. Thus if a single
+instruction, e.g. an addition is to be computed, it will take 5 clock
+cycles. This is the start-up time of the pipeline and when it is
+filled, one instruction per clock cycle is executed. 
+
+In order to achieve as many instructions computed per time as
+possible, the objective must be to keep the pipeline filled. However,
+situations may arise when this seems difficult. For instance when
+there are dependencies between stages, e.g. that the output from
+execution E1 is the input to execution E2. This means that E2 may have
+to wait for E1 to finish and the pipeline is stalled for a number of
+clock cycles. An other situation is the following:
+
+\begin{verbatim}
+...
+if(a == 3)
+  a = 2 
+else
+  a++
+end if
+...
+\end{verbatim}
+Here as the instruction for the if statement has been fetched, it is
+not clear what instruction will be fetched in the next clock
+cycle. The if statement must first be evaluated before such a decision
+can be made. Thus the pipeline is stalled also in this case. From this
+example we conclude that having branch statements in places where they
+are often executed, e.g. in loops, is a performance loss and should be
+avoided. Sometimes it is not avoidable and therefore, modern compilers
+have a way of dealing with this issue. A usual approach is to guess
+which branch that will be taken and continue to fill the pipeline with
+its content. Some compilers always ``guess'' the branch following the
+first conditional statement, in this case it is important for the
+programmer to know this in order to put the most likely case
+here. \cite{wiki-pipeline}
+
+The conclusion from this section is that unnecessary branches and data
+dependency in loops must be avoided and when this may not be the case,
+one must make sure that the compiler does its best to optimise these
+situations. 
+
+
+\nomenclature{CISC}{Complex Instruction Set Computing}
+\nomenclature{RISC}{Reduced Instruction Set Computing}
+\nomenclature{CPU}{Central Processing Unit}
+\nomenclature{PU}{Processing Unit}

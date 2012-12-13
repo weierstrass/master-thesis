@@ -1,25 +1,23 @@
-\chapter{A few notes on high performance computing}
-intro what is said below refer to computers of a certain
-architecture... 
+\chapter{High performance computing and the LBM}\label{sec:hpc}
+To benefit as much as possible from a numerical method, it is crucial
+that it is implemented in an efficient manner. In this chapter, some
+important aspects of this is discussed. In order to write a code that
+allows for efficient execution, some principles behind how a computer
+operates must be considered in detail. This varies considerable
+between various computer architectures. In this chapter, the
+discussion is limited to computers that implement the x86(-64)
+architecture which is a very common alternative among today's
+workstations.
 
-\section{The pipeline}
-keep it full.
+\input{hpc/hpc_pipeline}
 
-\section{Locality}
-using the caches in a good way. some examples of its importance. 
-\subsection{Locality and LBM}
+\input{hpc/hpc_locality}
 
-\section{Parallelisation}
-shared memory, distributed memory...
+\input{hpc/hpc_para}
+%\section{Maybe something about profiling}
+%men kanske inte tillför något vettigt.
 
-data dependence, LBM good!
+%\section{Choice of programming language}
 
-OpenMP/MPI
-
-\section{Maybe something about profiling}
-men kanske inte tillför något vettigt.
-
-\section{Choice of programming language}
-
-\section{Some stats on the performance of the code...}
-Lattice updates/s
+%\section{Some stats on the performance of the code...}
+%Lattice updates/s

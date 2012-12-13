@@ -1,5 +1,5 @@
 \section{Basic idea of the LBM}
-As previously noted, the lattice-Boltzmann is a mesoscopic
+As previously noted, the lattice-Boltzmann method is a mesoscopic
 method. This means that the modelling is neither done on a microscopic
 (molecular) level nor by direct solving the macroscopic equations
 involved. The aim, in the most situations with the lattice-Boltzmann
@@ -12,7 +12,7 @@ scheme.
 
 Basically the lattice-Boltzmann method solves a discretised version of
 eq. \eqref{eq:lbm:boltzmann-eq} for the distribution functions from
-which the macroscopic quantities then are determined. Both the spatial
+which the macroscopic quantities may be determined. Both the spatial
 positions and the velocity space is discretised allowing the
 distributions to ``sit'' only at certain positions and to stream to
 neighbouring locations only in certain directions. A naive way to
@@ -28,14 +28,14 @@ variables but is indeed fewer than the number of variables needed for
 a microscopic approach.
 
 The discretised Boltzmann equation is referred to as the
-lattice-Boltzmann equation and is one of the fundamental corner stones
-in the lattice-Boltzmann method, it reads:
+lattice-Boltzmann equation (LBE) and is one of the fundamental corner
+stones in the lattice-Boltzmann method, it reads:
 
 \begin{equation}\label{eq:lbm:lbe}
 f_i(\x + \cbf_i\delta_t, t + \delta_t) - f_i(\x, t) = \Omega_{ij}(\x, t)
 \end{equation}
 where $f_i$ denotes the distribution function for direction $\cbf_i$,
-$\delta_t$ is the time step and $\Omega_i$ is the (for now
+$\delta_t$ is the time step and $\Omega_ij$ is the (for now
 non-specified) collision operator. An implicit sum over the second
 velocity index $j$ is assumed. Various forms of collision operators
 exist and will be further discussed in section \ref{sec:lbm:col}.
@@ -85,3 +85,5 @@ fig. \ref{fig:lbm:algo}, a flow scheme of the algorithm is shown.
   variable.}
 \label{fig:lbm:algo}
 \end{figure}
+
+\nomenclature{LBE}{Lattice-Boltzmann Equation}

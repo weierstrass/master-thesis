@@ -7,14 +7,14 @@ present and if the system has reached a steady state, i.e. $\partial
 \C /\partial t = 0$ and $\ubf = \mathbf{0}$ we have:
 
 \begin{equation}\label{pb_constant_flux}
-D\nabla \C + \frac{zq_eD}{k_BT}\C\nabla\psirm = \alpha
+D\nabla \C + \frac{zq_eD}{k_BT}\C\nabla\psirm = \J_0
 \end{equation} 
-where $\alpha$ is some arbitrary constant. Due to the steady state
+where $\J_0$ is a constant flux. Due to the steady state
 assumption, what the equation above actually says is that the net flux
-of charge in the system is constant. Since no flux of charge is wanted
-to flow through the wall boundary, the flux is set to zero on the wall
+of charge in the system is constant. Since no charges are wanted to
+flow through the wall boundary, the flux is set to zero on the wall
 and since the flux is constant it will therefore be zero everywhere in
-the liquid, i.e. $\alpha = 0$.
+the liquid, i.e. $\J_0 = 0$.
 
 Considering only a one-dimensional situation with a position variable
 $y$ varying in a direction out from the wall into the liquid,
@@ -59,15 +59,16 @@ the Poisson-Boltzmann equation in one dimension
 
 \subsubsection{The Debye–Hückel approximation}
 Historically, the non-linear nature of eq. \eqref{eq:pb_real}
-complicated when it came to solving it. This was a major difficulty in
-the past when the computational power at hands were rather limited. A
-linearisation is therefore sometimes done, this linear version of the
-PB equation is often referred to as the Debye–Hückel
+complicated for those wanting to solve it. This was a major difficulty
+in the past when the computational power at hands were rather
+limited. A linearisation is therefore sometimes done, this linear
+version of the PB equation is often referred to as the Debye–Hückel
 approximation. The solution of the linearisation gives, something to
 compare with and is usually used when defining a characteristic length
 scale of the EDL.
 
-For a 1:1 electrolyte solution, eq. \eqref{eq:pb_real} reduces to
+For a 1:1 electrolyte solution with an equal amount of positive and
+negatively charged ions, eq. \eqref{eq:pb_real} reduces to
 
 \begin{equation}
 \frac{d^2\psi(x)}{dx^2} = \frac{2\C^{\infty}q_ez}{\epsilon_r
@@ -80,19 +81,11 @@ and the linearised equation is
 \frac{d^2\psi(x)}{dx^2} = \frac{2\C^{\infty}q_e^2z^2}{\epsilon_r
   \epsilon_0 k_B T} \psi(x) = \kappa^2 \psi(x)
 \end{equation}
-where $\kappa^{-1}$ is the Debye length and gives a measure for the
-characteristic size of the EDL.
+where $\kappa^{-1}$ is the Debye length which is where the exponential
+solution has decayed to $e^{-1}$ of the boundary value. This quantity
+gives therefore a measure for the characteristic thickness of the EDL.
 
-\subsubsection{Limitations of the Poisson-Boltzmann model}
-As the Poisson-Boltzmann equation is derived several assumptions are
-made. First, the net flux of ions are assumed to be zero and that the
-advective contribution the flux is negligible. Thus, the PB equation is
-only applicable when the system is at (or very close) thermodynamical
-equilibrium.
-
-\todo{Continue this discussion...}
-
-
+\nomenclature{PB, P-B}{Poisson-Boltzmann model/equation}
 %% In this work, flows of ionic solution will be studied and the
 %% assumption with thermodynamical equilibrium does not apply. However
 %% for low-speed flows the model may still be a decent approximation,

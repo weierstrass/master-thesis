@@ -45,7 +45,29 @@
 \thispagestyle{empty}
 
 \begin{abstract}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+The lattice-Boltzmann method is used to model flow in electrokinetic
+systems. A modelling approach based on the coupling of Navier-Stokes,
+Nernst-Planck and Poisson's equation of electrostatics is
+utilised. Three lattice-Boltzmann methods are formulated for the three
+equations respectively.
+
+An implementation with the aim of being high performing is
+done. Topics as locality, instruction pipelines and parallel computing
+are considered. The implementation is tested for a number of classic
+examples with known solutions, e.g.  Taylor vortex flow, an Helmholtz
+equation and an advection-diffusion situation. The computed solutions
+agree well with the analytic solutions.
+
+The systems modelled consists mainly of various charged channel flows
+of ionic solutions. Electrokinetic effects, such as electroosmosis and
+the electrovicous effect are studied. This is done in thin channels
+where the thickness of the electrical double layers is comparable to
+the channel dimension. The electroviscous effect is shown to slow the
+flow down and a local minimum is found in the velocity profile for
+thick enough double layers. Other more complicated systems are also
+studied; electroosmotic flow in a channel with heterogeneously charged
+walls and flow in a an array of charged squares.
+
 \end{abstract}
 
 \newpage
@@ -55,9 +77,15 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
 \clearpage
 \thispagestyle{empty}
 \section*{Acknowledgements}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. \\[1cm]
+I would hereby like to express my gratitude to my supervisor Alexei
+Heintz. You did always have time for questions and discussions even
+during your spare time and on your vacation. Also the precise amount
+of guidance and the freedom given is very much appreciated. I am
+thankful for having been given the opportunity of working on a project
+where the fields of my interest from physics, mathematics and
+programming was all present.  \\[1cm]
 
-\hfill The Authors, Location 11/9/11
+\hfill Andreas B\"{u}lling, G\"{o}teborg, \today
 \newpage
 \clearpage
 \mbox{}

@@ -2,7 +2,7 @@
 In all physical situations, when solving a differential equations on a
 domain, conditions for what is happening on the boundary of the domain
 must be specified. So far, only the update rule for $\fii$ on the
-interior of this domain have been treated. In this section we will
+interior of this domain has been treated. In this section we will
 also define rules for the boundaries of the domain. The nodes in the
 interior and the boundary will be referred to as \emph{interior nodes}
 and \emph{boundary nodes} respectively. Typically, a boundary
@@ -76,14 +76,26 @@ fig. \ref{fig:lbm:bounds}. Instead of making all pseudo particles
 ``bounce back'', they are reflected in a mirror-like manner, see
 fig. \ref{fig:lbm:slip}. This gives that the component normal to the
 boundary of the first moment is zero while the tangential component is
-unchanged. In this work this condition is for instance used to set the
-ion flux at the boundary to zero, eq. \eqref{eq:et:j0}.
+unchanged. In this work, this condition is used to set the
+ion flux through the boundary to zero, eq. \eqref{eq:et:j0}.
 
 It is not as straight-forward to define rules at corner and edge
 nodes, as for the straight boundary nodes. From tests, it has been
 shown that adequate accuracy may be obtained by treating the corner or
 edge as two perpendicular straight boundaries and mirror reflect half
 of the distributions at each plane respectively. 
+
+\begin{figure}
+  \centering
+  \subfloat[Bounce-back
+    ]{\label{fig:lbm:no_slip}\includegraphics[width=0.35\textwidth]{fig/no_slip.pdf}}      
+  \hspace{5pt} \subfloat[Mirror reflection
+  ]{\label{fig:lbm:slip}\includegraphics[width=0.35\textwidth]{fig/slip.pdf}}
+  \caption{Intuitive scheme for an incoming pseudo particle for two
+    common boundary conditions in the LBM. The bounce-back rule (a)
+    and mirror reflection (b).}
+  \label{fig:lbm:bbs}
+\end{figure}
 
 \subsubsection{With momentum addition}\label{sec:lbm:mod_mirror}
 In the case with the fixed surface charge boundary condition,
@@ -94,6 +106,6 @@ domain. The total surface charge may be divided between the directions
 in different proportions, in this work it is however evenly
 distributed, i.e. one third per direction. 
 
-\subsection{he-zou, constant density/velocity}\label{sec:lbm:hezou}
+%\subsection{he-zou, constant density/velocity}\label{sec:lbm:hezou}
 
-\subsection{Maybe something on non-local boundary conditions}
+%\subsection{Maybe something on non-local boundary conditions}

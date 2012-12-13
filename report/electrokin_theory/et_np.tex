@@ -29,9 +29,9 @@ potential, $\psirm(\x, t)$, is given by the Nernst equation
 \begin{equation}
 \J_{ele} = -\frac{zq_eD}{k_BT}\C\nabla\psirm
 \end{equation}
-where $z$ is the relative charge of an ion, $q_e$ is the fundamental
-charge, $k_B$ is the Boltzmann constant and $T$ is the temperature of the
-fluid.
+where $z$ is the relative charge of the ion species, $q_e$ is the
+fundamental charge, $k_B$ is the Boltzmann constant and $T$ is the
+temperature of the fluid.
 
 Summing up the fluxes and putting them into eq. \eqref{eq:charge_conc}
 gives
@@ -42,13 +42,16 @@ gives
 \right]
 \end{equation}
 which is a known result often referred to as the Nernst-Planck
-equation. The advective velocity, $\ubf$, and the potential gradient,
-$\nabla \psirm$, are obtained from couplings to the Navier-Stokes and
-Poisson's equation respectively. More about the coupling between the
-equations is discussed in section \ref{sec:et:coupling}.
+equation. This is the equation for the transport of \emph{one} species
+of ions, if several are present one NP equation for each species needs
+to be solved. The advective velocity, $\ubf$, and the potential
+gradient, $\nabla \psirm$, are obtained from couplings to the
+Navier-Stokes and Poisson's equation respectively. More about the
+coupling between the equations is discussed in section
+\ref{sec:et:coupling}.
 
 \subsection{Boundary conditions}
-Depending on the physical situation that is being modelled, different
+Depending on the physical situation being modelled, different
 conditions may be imposed at the boundaries of the domain. Throughout
 this work, at hard boundaries (walls), the charge flux through the
 boundary is set to zero, i.e.:

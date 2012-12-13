@@ -1,2 +1,62 @@
 \chapter{Conclusions}
-And what do we conclude of this?
+
+From the theoretical analysis made, the benchmarks performed and the
+results obtained, the main conclusion in this work is that the
+lattice-Boltzmann method may indeed be used to model electrokinetic
+systems. In \cite{lbm-wang}, a coupling of the same equations as in
+this work is done. Also a lattice-Boltzmann approach for solving the
+equations is proposed. There are however several differences between
+what is done here and in \cite{lbm-wang}. First, different equilibrium
+distributions are used for the Nernst-Planck and Poisson's
+equations. In \cite{lbm-wang}, a Navier-Stokes-like equilibrium
+including quadratic terms\footnote{One of the ``quadratic terms'' is
+  actually missing the square, this must be a typo. Otherwise the
+  concentration is not obtained as the zeroth moment as stated. It
+  also does not agree with the reference used for motivating the
+  equilibrium distribution.} are used for the Nernst-Planck equation
+and for the Poisson's equation different weights are used. Second,
+different implementations of the boundary conditions are used. Also,
+the no-flux boundary condition used in the Nernst-Planck equation is
+integrated into the fluid domain and rewritten as a Dirichlet
+condition. This is not very accurate, since the boundary condition
+only apply for the boundary and not in the interior of the
+domain. Further, some results are contradictory to the system
+modelled, e.g. it is stated that a 1:1 solution is modelled even
+though the computed, charge density is strictly positive. It must
+therefore be some source of positive or leak of negative ions present,
+a guess is that it is due to the incorrect boundary treatment for the
+ion flux at the channel walls.
+
+The lack of scientific results on the lattice-Boltzmann method or
+results which sometimes seem a bit off, is a sign of the youth of the
+method and a rather great limitation when working with it. There are
+few ``school books'' with detailed explanations. Instead, scientific
+papers where all details sometimes are not written out explicitly
+have to be addressed.
+
+When browsing work on modelling of electrokinetics, usually the
+Poisson-Boltzmann method is utilised. Sometimes even without
+reflection of whether it is applicable or not. From this work it is
+concluded that as the thickness of the double layer gets comparable to
+the dimensions of the system considered or if advection is present,
+the Poisson-Boltzmann approach may not be an accurate model. The
+underlying assumptions used in the derivation must be studied and
+assured to be fulfilled in the system under consideration.
+
+In situations where the Poisson-Boltzmann approach fails, the more
+general method proposed in this work may be used instead. Few results
+of the more complicated systems modelled in this work was found and it
+is therefore difficult to determine a qualitative and quantitative
+correctness. Experimental results for this kind of system is very
+difficult to obtain, the detailed measurement of a velocity
+field in a system is not simple to determine. 
+
+To get an efficient implementation of the method, topics from
+high-performance computing must be considered. The distribution
+function must be organised in memory to allow for good locality in the
+computation. Also unnecessary branches and data dependence should be
+avoid in the innermost loop. It is important to use a modern and
+uptodate compiler and it may be a good idea to tell the compiler to
+optimise the code as much as possible. The LBM algorithm is also very
+well suited for parallelisation. This is due to that there is no data
+dependence between nodes in the collision step.

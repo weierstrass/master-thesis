@@ -13,7 +13,7 @@ dimension $d$ and with $q$ distinct velocities is denoted by
 D$d$Q$q$. For example a lattice with 9 velocities in dimension 2 is
 denoted D2Q9. An example of two different lattices is presented in
 fig. \ref{fig:lbm:lattices}. The D2Q9 lattice is also the one that
-will be used in this work, the velocities $\ci$ is given by
+will be used in this work, the velocities $\ci$ are given by
 
 \begin{equation}\label{eq:lbm:d2q9_c}
 \{\ci\} = \left\{
@@ -65,10 +65,10 @@ posses the following properties:
 
 where the sums are over the discrete velocities $\ci$, $w_i$ are
 lattice specific weights $c_s$ is the sound of speed for the lattice
-and $\delta_{ij}$ is Kroenecker deltas. 
+and $\delta_{ij}$ is a Kroenecker delta. 
 
 The weights are introduced to compensate for the fact that different
-velocity vectors $\ci$ is of different length. See for example the
+velocity vectors are of different length. See for example the
 D2Q9 lattice in fig. \ref{fig:lbm:q9} where three lengths are
 present. In this case, three different weights will be needed. From
 the relations in eqs. \eqref{eq:lbm:i1} follow that
@@ -84,9 +84,11 @@ w_i =
 \end{equation}
 The quantity $c_s$ which often is referred to as the speed of sound
 may be thought of as an effective propagation velocity of the lattice
-and is determined to
+and is determined, for the D2Q9 lattice, to
 
 \begin{equation}
 c_s = c/\sqrt{3}
 \end{equation} 
 where $c = |\mathbf{c}_{1,2,3,4}| = \delta_x/\delta_t$.
+
+\nomenclature{D2Q9}{2D lattice with 9 discrete velocities}

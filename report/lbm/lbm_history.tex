@@ -11,12 +11,11 @@ the time, this kind of statistical computational approaches was not
 considered a serious alternative for the modelling of more
 sophisticated and complex systems such as fluid behaviour. It was
 first in the mid 80's when Frisch, Hasslacher and Pomeau showed that a
-lattice automaton, with a lattice of certain symmetry and that
-conserved mass and momentum in the collisions, reproduced the
-Navier-Stokes equations in a macroscopic limit. It was by their work
-and the always increasing computational power that made the idea of
-fluid modelling on a mesoscopic scale a serious research
-topic. \cite{wolf-gladrow}
+lattice automaton that conserved mass and momentum in the collisions
+and with a lattice of certain symmetry, reproduced the Navier-Stokes
+equations in a macroscopic limit. It was by their work and the always
+increasing computational power that made the idea of fluid modelling
+on a mesoscopic scale a serious research topic. \cite{wolf-gladrow}
 
 The lattice gas automata (LGA) approach was not perfect and suffered
 from some notable flaws, e.g. that the boolean nature of the method
@@ -24,7 +23,7 @@ introduced statistical noise and that lack of symmetry in the lattices
 used made the advection non-isotropic. The statistical noise was
 usually dealt with by averaging which resulted in a coarsed domain and
 the advection issue was handled by introducing lattices of higher
-symmetry. A consequence of the boolean variables is that only one
+symmetry. An other consequence of the boolean variables is that only one
 particle per state was allowed which resulted in an equilibrium state
 from Fermi-Dirac statistics rather than the desired Maxwell-Boltzmann
 statistics. 
@@ -39,5 +38,8 @@ competitor to more traditional CFD methods. For example with
 advantages when it comes to parallelisation or implementing boundary
 conditions in complex geometries. One major downside with the LBM is
 the lack of theoretical work done and lack of literature compared to
-the case with traditional methods such as finite element/volume
+the case with more traditional methods such as finite element/volume
 methods. \cite{junk-asym}
+
+\nomenclature{LGA}{Lattice Gas Automata/Automaton}
+\nomenclature{CFD}{Computational Fluid Dynamics}

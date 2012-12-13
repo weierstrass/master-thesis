@@ -1,14 +1,49 @@
 \chapter{Introduction}
-Short intro for this section
+This thesis deals with modelling of physical problems in the
+interdisciplinary field of hydrodynamics and electrostatics. The tool
+used for realising this is the new and promising but somewhat immature
+lattice-Boltzmann method. This is a method that is still under
+development but is today used in practical applications both in
+industry and academy.
 
 \section{Background}
-Historically - LBM and modelling of electrohydrodynamics. Development
-til today.
 
-\section{General problem description}
-Description of problem + what we want to achieve in this work.
+There is currently an ongoing project at the mathematics faculty of
+Chalmers University in producing a modelling package that
+should be able to deal with transport of various liquids and particles
+through complicated structures. The method of choice has fallen upon
+the lattice-Boltzmann method for its suitable characteristics in the
+systems of interest. 
+
+This work aims to investigate the possibility and procedure for taking
+electrical effects into account in the modelling of charged
+fluids. More theoretical questions about the method itself and of the
+physics involved is of interest as well as how the method may be
+effectively implemented on a computer.
+
+From both industry and academy, there is a demand on the modelling of
+this kind of physics. For instance, in medical sciences, accurate
+modelling of transport of charged fluids is a fundamental ingredient
+in understanding biological systems and to be able to manipulate
+them. As a consequence of the always so present desire of more
+environmental friendly ways of using the planet, automotive industry
+are now engineering electrical cars. A great challenge is to produce
+high performing and durable batteries, the ability to accurate
+model the electrolytes in the batteries is indeed an advantage in
+achieving this. 
 
 \section{Outline}
-How is this report structured?
+The text is structured in five main chapters. In chapter \ref{sec:et},
+is the physics involved and the equations of interest presented. This
+is followed by chapter \ref{sec:lbm} where the lattice-Boltzmann
+method is formulated for the different equations of interest. Also an
+introduction to the method as well as some discussion on different
+boundary conditions is given here. In chapter \ref{sec:hpc}, the
+implementation of the method is discussed together with some general
+aspects that is important to have in mind in order to produce a high
+performing code. The implementation is then tested for classic
+examples with known solutions in chapter \ref{sec:mb}. Finally some
+results in electrokintetics are presented and discussed in chapter
+\ref{sec:res}. 
 
 
