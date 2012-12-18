@@ -1,0 +1,150 @@
+\documentclass[10pt,handout]{beamer} % mathserif for normal math fonts.
+
+\usefonttheme[onlymath]{serif}
+\usepackage{amsmath,mathtools}
+\usepackage{calc}
+\usepackage{caption}
+\usepackage{color}
+
+% KRJ: Removed because of xelatex
+%\usepackage[EU1]{fontenc}
+%\usepackage[utf8]{inputenc}
+%\usepackage{lmodern}
+\usepackage[swedish,english]{babel}
+\usepackage[babel]{csquotes}
+
+% KRJ: xelatex stuff
+\usepackage{xltxtra}
+%\usepackage{polyglossia}
+\usepackage{fontspec}
+%\usepackage[]{unicode-math}
+%\setmainfont{XITS}
+%\setmathfont{XITS Math}
+%\usepackage{csquotes}
+
+\usepackage{subcaption}
+\usepackage{listings}
+\lstset{ %
+language=Python,     
+basicstyle=\tiny,   
+numbers=none,         
+numberstyle=\tiny,    
+stepnumber=1,         
+numbersep=5pt,        
+backgroundcolor=\color[gray]{0.95},  
+showspaces=false,               
+showstringspaces=false,       
+showtabs=false,             
+frame=single,        
+tabsize=2,         
+captionpos=b,      
+breaklines=break,  
+linewidth=0.98\linewidth,
+xleftmargin=0.0\linewidth,
+breakatwhitespace=false,   
+%escapeinside={\%}{)}     
+    identifierstyle=\ttfamily,
+    keywordstyle=\color[rgb]{0,0,1},
+    commentstyle=\color[rgb]{0.133,0.545,0.133},
+    stringstyle=\color[rgb]{0.627,0.126,0.941}
+}
+
+\usetheme[titleflower=true]{chalmers} % titleflower = true or false
+\title{TITLE}
+\subtitle{SUBTITLE} % optional
+\author[Klas Jareteg]{Klas Jareteg} % [short author (optional)]{many authors}
+\institute{Chalmers University of Technology}
+\date{DATE}
+\footer{\insertshortauthor, FOOTER} 
+
+\usepackage[style=verbose]{biblatex}
+\addbibresource{/home/klas/Documents/PhD/Library/Sources.bib}
+\let\oldfootnotesize\footnotesize
+\renewcommand*{\footnotesize}{\oldfootnotesize\tiny}
+\newcommand{\KRJScale}{0.33}
+
+\usepackage{../styles/KJCommands}
+
+% KRJ, Colorbox for equations and theorems
+%\usepackage[listings,theorems]{tcolorbox}
+%\newenvironment{krjbox}[1]{
+%\centering
+%\tcolorbox[width=0.9\textwidth,colback=chalmersblue!5,colframe=chalmersblue,title=#1,fontupper=\scriptsize]}
+%{\endtcolorbox}
+
+\AtBeginSection[]
+{
+\begin{frame}
+%\usebeamerfont{section title}\insertsection
+\begin{columns}
+\begin{column}[]{0.5\textwidth}
+%\begin{center}
+\vbox to .8\textheight{
+\huge\bf\insertsection
+\\[5cm]\vfill
+}
+%\end{center}
+\end{column}
+\begin{column}[b]{0.5\textwidth}
+\vbox to .3\textheight{
+\small{\tableofcontents[currentsection]}
+\vfill
+}
+\end{column}
+\end{columns}
+\end{frame}
+}
+
+%\AtBeginSection[]{
+%  \setbeamercolor{section in toc shaded}{use=structure,fg=structure.fg}
+%  \setbeamercolor{section in toc}{fg=chalmersblue}
+%  \setbeamercolor{subsection in toc shaded}{fg=black}
+%  \setbeamercolor{subsection in toc}{fg=chalmersblue}
+%  \frame<beamer>{
+%  %\begin{multicols}{2}
+%      \frametitle{Outline}
+%      \setcounter{tocdepth}{1}  
+%      \LARGE{
+%        \tableofcontents[currentsection]
+%      }
+%  %\end{multicols} 
+%  }
+%}
+
+% Notes in the document
+%\setbeameroption{show notes} 
+
+\newlength{\parskipbackup}
+\setlength{\parskipbackup}{\parskip}
+\newlength{\parindentbackup}
+\setlength{\parindentbackup}{\parindent}
+
+\let\notebackup\note
+\renewcommand{\note}[1]{\notebackup{%
+\mode<handout>{\addtocounter{page}{-1}}%
+\setlength{\parindent}{0ex}%
+\setlength{\parskip}{10pt}%
+\noindent%
+{\normalsize{}#1}%
+\setlength{\parskip}{\parskipbackup}%
+\setlength{\parindent}{\parindentbackup}%
+}%
+}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+ \titlepage
+\end{frame}
+
+\end{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

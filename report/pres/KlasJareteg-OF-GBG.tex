@@ -1,0 +1,700 @@
+\documentclass[9pt,handout]{beamer} % mathserif for normal math fonts.
+
+\usefonttheme[onlymath]{serif}
+\usepackage{amsmath,mathtools}
+\usepackage{calc}
+\usepackage{caption}
+\usepackage{color}
+
+% KRJ: Removed because of xelatex
+%\usepackage[EU1]{fontenc}
+%\usepackage[utf8]{inputenc}
+%\usepackage{lmodern}
+\usepackage[swedish,english]{babel}
+\usepackage[babel]{csquotes}
+
+% KRJ: xelatex stuff
+\usepackage{xltxtra}
+%\usepackage{polyglossia}
+\usepackage{fontspec}
+%\usepackage[]{unicode-math}
+%\setmainfont{XITS}
+%\setmathfont{XITS Math}
+%\usepackage{csquotes}
+
+\usepackage{subcaption}
+\usepackage{listings}
+\lstset{ %
+language=Python,     
+basicstyle=\tiny,   
+numbers=none,         
+numberstyle=\tiny,    
+stepnumber=1,         
+numbersep=5pt,        
+backgroundcolor=\color[gray]{0.95},  
+showspaces=false,               
+showstringspaces=false,       
+showtabs=false,             
+frame=single,        
+tabsize=2,         
+captionpos=b,      
+breaklines=break,  
+linewidth=0.98\linewidth,
+xleftmargin=0.0\linewidth,
+breakatwhitespace=false,   
+%escapeinside={\%}{)}     
+    identifierstyle=\ttfamily,
+    keywordstyle=\color[rgb]{0,0,1},
+    commentstyle=\color[rgb]{0.133,0.545,0.133},
+    stringstyle=\color[rgb]{0.627,0.126,0.941}
+}
+
+\usetheme[titleflower=true]{chalmers} % titleflower = true or false
+\title{Coupled calculations in OpenFOAM - }
+\subtitle{Multiphysics handling, structures and solvers, Gothenburg Region OpenFOAM User Group Meeting } % optional
+\author[Klas Jareteg]{Klas Jareteg} % [short author (optional)]{many authors}
+\institute{Chalmers University of Technology}
+\date{November 14, 2012}
+\footer{\insertshortauthor, Gotheburg Region OpenFOAM User Group Meeting } 
+
+\usepackage[style=verbose]{biblatex}
+\addbibresource{/home/klas/Documents/PhD/Library/Sources.bib}
+\let\oldfootnotesize\footnotesize
+\renewcommand*{\footnotesize}{\oldfootnotesize\tiny}
+\newcommand{\KRJScale}{0.33}
+\newcommand{\Ukrj}{\mathbf{U}}
+\newcommand{\Sf}{\mathbf{S}_\mathrm{f}}
+\newcommand{\Pp}{P}
+\newcommand{\D}{\overline{\mathbf{D}_\mathrm{f}}}
+\newcommand{\Dnobar}{\mathbf{D}_\mathrm{f}}
+
+\usepackage{../styles/KJCommands}
+
+% KRJ, Colorbox for equations and theorems
+%\usepackage[listings,theorems]{tcolorbox}
+%\newenvironment{krjbox}[1]{
+%\centering
+%\tcolorbox[width=0.9\textwidth,colback=chalmersblue!5,colframe=chalmersblue,title=#1,fontupper=\scriptsize]}
+%{\endtcolorbox}
+
+\AtBeginSection[]
+{
+\begin{frame}
+%\usebeamerfont{section title}\insertsection
+\begin{columns}
+\begin{column}[]{0.5\textwidth}
+%\begin{center}
+\vbox to .8\textheight{
+\huge\bf\insertsection
+\\[5cm]\vfill
+}
+%\end{center}
+\end{column}
+\begin{column}[b]{0.5\textwidth}
+\vbox to .3\textheight{
+\small{\tableofcontents[currentsection]}
+\vfill
+}
+\end{column}
+\end{columns}
+\end{frame}
+}
+
+%\AtBeginSection[]{
+%  \setbeamercolor{section in toc shaded}{use=structure,fg=structure.fg}
+%  \setbeamercolor{section in toc}{fg=chalmersblue}
+%  \setbeamercolor{subsection in toc shaded}{fg=black}
+%  \setbeamercolor{subsection in toc}{fg=chalmersblue}
+%  \frame<beamer>{
+%  %\begin{multicols}{2}
+%      \frametitle{Outline}
+%      \setcounter{tocdepth}{1}  
+%      \LARGE{
+%        \tableofcontents[currentsection]
+%      }
+%  %\end{multicols} 
+%  }
+%}
+
+% Notes in the document
+%\setbeameroption{show notes} 
+
+\newlength{\parskipbackup}
+\setlength{\parskipbackup}{\parskip}
+\newlength{\parindentbackup}
+\setlength{\parindentbackup}{\parindent}
+
+\let\notebackup\note
+\renewcommand{\note}[1]{\notebackup{%
+\mode<handout>{\addtocounter{page}{-1}}%
+\setlength{\parindent}{0ex}%
+\setlength{\parskip}{10pt}%
+\noindent%
+{\normalsize{}#1}%
+\setlength{\parskip}{\parskipbackup}%
+\setlength{\parindent}{\parindentbackup}%
+}%
+}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+ \titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Outline}
+\begin{itemize}\itemsep10pt
+\item Region coupling and block coupling
+\item Overview of coupled formats in OpenFOAM
+\item Application 1: Multiphysics simulations for nuclear reactors
+\item Application 2: Block coupled solver for incompressible flow
+\item Summary and future outlook 
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{On coupled problems}
+\begin{frame}%[allowframebreaks]
+\setbeamercovered{transparent}
+\frametitle{Coupled problems}
+\begin{itemize}
+    \item Multiple field problems and/or equations problems, e.g.:
+    \begin{itemize}\itemsep6pt
+        \item Navier-Stokes
+        \item Conjugate heat-transfer
+        \item Nuclear reactor modeling
+        \item Multi-group radiation
+        \item Multiphase modeling
+    \end{itemize}
+    \pause
+    \item Not enough to solve one problem. 
+\end{itemize}
+\vfill
+\pause
+\bf How to solve the coupling of the fields/equations/regions?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Region coupling}
+\subsection{Background}
+\begin{frame}[t]
+\frametitle{Background}
+\setbeamercovered{transparent}
+\begin{columns}
+    \begin{column}{0.55\textwidth}
+    \begin{itemize}
+    \item<1->{\bf Characteristic:}
+    \begin{itemize}
+        \item Multiple materials (solid/fluid)
+        \item Similar physics in many regions ($T$)
+        \item Coupled boundaries
+    \end{itemize}
+    \vskip10pt
+    \item<2>
+    {\bf Solution methods:}
+    \begin{itemize}
+        \item Segregated solver - Iterative solution of region by region
+        \item Coupled solver - Solve multiple regions at once
+    \end{itemize} 
+    \end{itemize} 
+    \end{column}
+    \begin{column}[]{0.45\textwidth}
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[width=1.0\textwidth]{/home/klas/Documents/PhD/Courses/OpenFOAM/Projects/1/report/handedin/figures/conjugateCavity-T.pdf}
+        \caption{\OF{conjugateCavity}, dual region simulation}
+    \end{figure}
+    \end{column}
+\end{columns}
+    \begin{figure}[ht]
+        \centering
+        \includegraphics<2>[width=0.6\textwidth]{figures/RegionCoupling.pdf}
+        %\caption{}
+    \end{figure}
+\vfill
+\end{frame}
+
+\subsection{OpenFOAM}
+\begin{frame}%[allowframebreaks]
+\frametitle{Regional coupling in OpenFOAM I}
+\setbeamercovered{transparent}
+\begin{itemize}
+    \item Regional coupling availble through \OF{coupleFvMatrix}.
+            \lstinputlisting[title={Energy equation in \OF{conjugateHeatFoam}},language=C++,linerange=10-34,firstnumber=10]{/home/klas/OpenFOAM/OpenFOAM-1.6-ext/applications/solvers/coupled/conjugateHeatFoam/solveEnergy.H}
+\end{itemize}
+\end{frame}
+
+\begin{frame}%[allowframebreaks]
+\frametitle{Regional coupling in OpenFOAM II}
+\setbeamercovered{transparent}
+\begin{itemize}
+    \item \OF{regionCouple} boundary condition at coupled patches
+    \pause
+    \item Existing solvers \OF{CG}, \OF{BiCGStab}, \OF{BiCG}, \OF{smoothSolver}
+    \pause
+    \item Parallelizable 
+    \pause
+    \item Utilities (mostly) compatible with multiple regions (\OF{splitMesh}, \OF{foamToVTK}, \OF{sample}, \OF{decomposePar}, \OF{reconstructPar}) 
+\end{itemize}
+\pause
+\vfill
+
+\rule{0.5\textwidth}{0.5pt}\newline
+\scriptsize
+{\bf Additional sources:}
+\begin{itemize}
+    \item \fullcite{jasak:of:w7}
+    \item \fullcite{krj:master}
+\end{itemize}
+\end{frame}
+
+\subsection{Application: multiphysics in nuclear reactors}
+
+\begin{frame}%[allowframebreaks]
+\setbeamercovered{transparent}
+\frametitle{Application: multiphysics in nuclear reactors}
+Nuclear reactor cores: multiphysics environment
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.55]{/home/klas/Documents/Master/Reports/siamuf/figures/Multi5.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}%[allowframebreaks]
+\setbeamercovered{transparent}
+\begin{columns}
+    \begin{column}[]{0.5\textwidth}
+    \begin{itemize}\itemsep8pt
+        \item \textbf{Multi-region environment}: Both solid and fluid, different types of materials
+        \item<2> \textbf{Fields in all regions}:
+        \begin{itemize}\itemsep8pt
+            \item Temperature (solid: conduction, fluid: convection)
+            \item Multi-group neutron density field (same model equation all regions)
+        \end{itemize}
+    \end{itemize}
+    
+    \end{column}
+    \begin{column}[]{0.5\textwidth}
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[width=1.0\textwidth]{figures/Fuel.pdf}
+        \caption{Slice of nuclear fuel pin}
+    \end{figure}    
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}%[allowframebreaks]
+\frametitle{OpenFOAM implementation}
+\setbeamercovered{transparent}
+\begin{itemize}\itemsep8pt
+    \item Implemented using OpenFOAM 1.6-ext.
+    \item Region coupling for an arbitrary number of pins
+    \item Segregated solver considering field dependencies
+    %\item Eigenvalue solver (power iteration method) using the neutron density fields
+\end{itemize}
+
+\vfill
+\pause
+\rule{0.5\textwidth}{0.5pt}\newline
+\scriptsize
+{\bf Details:}
+\begin{itemize}
+    \item \fullcite{krj:master}
+    \item \fullcite{krj:website}
+\end{itemize}
+\end{frame}
+
+\begin{frame}%[allowframebreaks]
+\frametitle{Example results}
+\vspace{16pt}
+\begin{figure}[!htb]
+\centering
+\begin{subfigure}{0.46\textwidth}
+\centering
+\includegraphics[width=1.0\textwidth]{/home/klas/Documents/PhD/Articles/2-ForMoC2013/figures/results/TAll.pdf}
+\caption{All regions}
+\end{subfigure}
+\begin{subfigure}{0.46\textwidth}
+\centering
+\includegraphics[width=1.0\textwidth]{/home/klas/Documents/PhD/Articles/2-ForMoC2013/figures/results/T.pdf}
+\caption{Moderator only}
+\end{subfigure}
+\caption{\bf Radial temperature profiles.} 
+%\label{fig:res:T:radial}
+\end{figure}
+\end{frame}
+
+%\begin{frame}%[allowframebreaks]
+%\frametitle{Learning outcomes}
+%\begin{itemize}
+%    \item Region coupling in OpenFOAM 1.6-ext functional for large number of regions
+%    \item Not all solvers applicable for all problems
+%    \item Parallelization working, but some caution is needed
+%    \item OpenFOAM 1.6-ext is well suited for multiphysics problems
+%    \item Many regions gives $\rightarrow$ lots of data (initial/boundary conditions). Need scripting.
+%\end{itemize}
+%\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Field coupling}
+
+\subsection{Background}
+\begin{frame}%[allowframebreaks]
+\setbeamercovered{transparent}
+\frametitle{Coupling 2: Field coupling}
+\begin{columns}
+    \begin{column}[]{0.6\textwidth}
+    \begin{itemize}
+    \item {\bf Characteristic:}
+    \begin{itemize}
+        \item Multiple fields ($\alpha, U_g, U_l, p$)
+        \item Couplings between fields
+        \item Same mesh (typically)
+        \item Field dependent parameters
+    \end{itemize}
+    \item<2>{\bf Solution methods:}
+    \begin{itemize}
+        \item Segregated solver - Iterative solution. Solve one field at a time. Explicit coupling.
+        \item Coupled solver - Solve all/multiple fields at once. Implicit coupling.
+    \end{itemize}
+    \end{itemize}
+    \end{column}
+    \begin{column}[]{0.4\textwidth}
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[width=1.1\textwidth]{/home/klas/Documents/PhD/Courses/OpenFOAM/Projects/1/report/handedin/figures/VoidStream.pdf}
+        \caption{\OF{bubbleColumn}}
+    \end{figure}
+    \end{column}
+\end{columns}
+\pause
+\vfill
+\end{frame}
+
+%\begin{frame}%[allowframebreaks]
+%\frametitle{Coupled approach 1: extended system matrix}
+%\begin{itemize}
+%\item Consider coupled system:
+%\begin{eqnarray}
+%\mathbf{A}(y)x=a\\
+%\mathbf{B}(x)y=b
+%\end{eqnarray}
+%
+%\item Solved together (still segregated):
+%\begin{equation}
+%\label{eq:AB:uncoupled}
+%\begin{bmatrix}
+%\mathbf{A}(y) & 0 \\
+%0  & \mathbf{B}(x) \\
+%\end{bmatrix}
+%\begin{bmatrix}x\\y\end{bmatrix}
+%=
+%\begin{bmatrix}a\\b\end{bmatrix}
+%\end{equation}
+%\pause
+%\item Coupled solution:
+%\begin{equation}
+%\label{eq:AB:coupled}
+%\begin{bmatrix}
+%\mathbf{A}' & \mathbf{A}_y \\
+%\mathbf{B}_x  & \mathbf{B}' \\
+%\end{bmatrix}
+%\begin{bmatrix}x\\y\end{bmatrix}
+%=
+%\begin{bmatrix}a\\b\end{bmatrix}
+%\end{equation}
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}%[allowframebreaks]
+%\setbeamercovered{transparent}
+%\frametitle{Coupled approach 2: block coupled approach}
+%\begin{itemize}
+%\item Alternative formulation:
+%\begin{equation}
+%\label{eq:C:coupled}
+%\mathbf{C}z=c
+%\end{equation}
+%\pause
+%\begin{equation}
+%\mathbf{C} = C_{i,j}=\begin{bmatrix}c_{a,a} & c_{a,b} \\ c_{b,a} & c_{b,b}\end{bmatrix}_{i,j}
+%\end{equation}
+%\begin{equation}
+%c =  c_i = \begin{bmatrix}s_a &s_b\end{bmatrix}_i^\top
+%\end{equation}
+%\begin{equation}
+%z=z_i=\begin{bmatrix}x & y \end{bmatrix}_i^\top
+%\end{equation}
+%\pause
+%\item Element in vectors and matrices: vectors and tensors
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}%[allowframebreaks]
+%\setbeamercovered{transparent}
+%\frametitle{Advantages and drawbacks}
+%{\bf Coupling advantages:}
+%\begin{itemize}
+%    \item Possibly faster convergence
+%    \item Possibly better algorithms
+%\end{itemize}
+%{\bf Drawbacks:}
+%\begin{itemize}
+%    \item Larger amounts of memory 
+%    \item New solvers needed
+%\end{itemize}
+%\end{frame}
+
+\subsection{Application: block coupled incompressible flow solver}
+\begin{frame}%[allowframebreaks]
+\setbeamercovered{transparent}
+\frametitle{Application block coupled incompressible flow solver}
+\begin{itemize}\itemsep10pt
+    \item Incompressible steady-state Navier-Stokes:
+        \begin{equation}
+        \nabla\cdot(\Ukrj) = 0 
+        \end{equation}
+        \begin{equation}
+        \label{eq:momentum}
+        \nabla\cdot(\Ukrj\Ukrj)-\nabla(\nu\nabla \Ukrj) = -\frac{1}{\rho} \nabla p
+        \end{equation}
+    \pause
+    \item Traditionally segragated solvers (OpenFOAM \OF{simpleFoam})
+    \pause
+    \item Often slow convergence, pressure equation elliptic behaviour % \footfullcite{jasak:multigrid}
+    \pause
+    \item Possible remedy: coupled calculation using OpenFOAM 1.6-ext: \OF{BlockLduMatrix}
+\end{itemize}
+\vfill
+\pause
+\rule{0.5\textwidth}{0.5pt}\newline
+\scriptsize
+{\bf Additional sources:}
+\begin{itemize}
+    %\item \fullcite{jasak:multigrid}
+    \item \fullcite{of:block:rusche}
+    \item \fullcite{of:block:springer}
+    \item \fullcite{of:block:clifford}
+\end{itemize}
+\end{frame}
+
+\begin{frame}%[allowframebreaks]
+\setbeamercovered{transparent}
+\frametitle{Theory}
+\begin{itemize}
+    \item SIMPLE algorithm: pressure equation from the continuity equation, explicit use of velocity (from momentum predictor step)
+    \pause
+    \item Alternative approach: Rhie-Chow interpolation:
+\begin{equation}
+\label{eq:cont:rhie}
+\displaystyle\sum_\mathrm{faces} \left[\overline{\Ukrj_\mathrm{f}}-\D\left(\nabla \Pp_\mathrm{f}-\overline{\nabla \Pp_\mathrm{f}}\right)\right]\cdot\Sf=0
+\end{equation}
+\begin{equation}
+\label{eq:momentum:semi}
+\displaystyle\sum_\mathrm{faces} \left[ \Ukrj \Ukrj- \nu\nabla\Ukrj \right]_\mathrm{f}\cdot\Sf=-\displaystyle\sum_\mathrm{faces} \Pp_\mathrm{f}\Sf
+\end{equation}     
+\end{itemize}
+
+\vfill
+\pause
+\rule{0.5\textwidth}{0.5pt}\newline
+\scriptsize
+{\bf Additional sources:}
+\begin{itemize}
+    \item \fullcite{cfd:block:darwish}
+    \item \fullcite{of:block:mangani}
+    \item \fullcite{of:rhie-chow}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}%[allowframebreaks]
+\setbeamercovered{transparent}
+\frametitle{OpenFOAM implementation I}
+\begin{itemize}
+    \item Implemented using OpenFOAM-1.6-ext 
+    \pause
+    \item Block matrix class: \OF{BlockLduMatrix}
+    \begin{itemize}
+        \item Templated matrix class. Elements of arbitrary size:
+        \lstinputlisting[title={\OF{BlockLduMatrix.H}},language=C++,linerange=103-110,firstnumber=103]{/home/klas/OpenFOAM/OpenFOAM-1.6-ext/src/OpenFOAM/matrices/blockLduMatrix/BlockLduMatrix/BlockLduMatrix.H}
+        \pause
+        \item In this case: manual assembling of matrix coefficients and source for each term in the continuity and momentum equations (Eqs.~\eqref{eq:cont:rhie} and \eqref{eq:momentum:semi})
+\pause
+\begin{equation*}
+\label{eq:cont:rhie}
+\displaystyle\sum_\mathrm{faces} \left[\overline{\Ukrj_\mathrm{f}}-\D\left(\nabla \Pp_\mathrm{f}-\overline{\nabla \Pp_\mathrm{f}}\right)\right]\cdot\Sf=0
+\end{equation*}
+\begin{equation*}
+\label{eq:momentum:semi}
+\displaystyle\sum_\mathrm{faces} \left[ \Ukrj \Ukrj- \nu\nabla\Ukrj \right]_\mathrm{f}\cdot\Sf=-\displaystyle\sum_\mathrm{faces} \Pp_\mathrm{f}\Sf
+\end{equation*}     
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}%[allowframebreaks]
+\setbeamercovered{transparent}
+\frametitle{OpenFOAM implementation II}
+\begin{itemize}
+    \item For 3D solver: $\mathbf{A}x = f$
+    \begin{itemize}
+        \item Matrix element:
+            \begin{equation}
+            a_{i,j} = 
+            \begin{bmatrix}
+            a_{u,u} & 0 & 0 & a_{p,u} \\
+            0 & a_{v,v} & 0 & a_{p,v} \\
+            0 & 0 & a_{w,w} & a_{p,w} \\
+            a_{u,p} & a_{v,p} & a_{w,p} & a_{p,p} 
+            \end{bmatrix}_{i,j}
+            \end{equation}
+        \item Solution vector:
+            \begin{equation}
+            x_{i} = 
+            \begin{bmatrix}
+            u \\ v \\ w \\ p
+            \end{bmatrix}_{i}
+            \end{equation}
+    \end{itemize}
+    \pause
+    \item Off-diagonal coefficients giving the implicit coupling between pressure and velocity
+    \pause
+    \item New solvers implemented (\OF{GMRES}, \OF{BiCGStab}, \OF{CG})
+\end{itemize}
+\pause
+\scriptsize
+\vfill
+\rule{0.5\textwidth}{0.5pt}\newline
+{\bf Description of work:}
+\begin{itemize}
+    \item \fullcite{krj:block:report}
+    %\item \fullcite{krj:block:presentation}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]%[allowframebreaks]
+\setbeamercovered{transparent}
+\frametitle{Case study \OF{pitzDailyFoam}}
+\begin{itemize}
+    \item New solver benchmarked against \OF{simpleFoam} using the standard \OF{pitzDailyFoam}.
+    \pause
+    \item Convergence profile (non-turbulent case):
+\end{itemize}
+
+\only<2->{
+\begin{figure}[h]
+\centering
+\begin{subfigure}{0.49\textwidth}
+    \centering
+    \includegraphics<2->[width=1.0\textwidth]{/home/klas/Documents/PhD/Courses/OpenFOAM/Projects/3/Reports/lecture/../final/figures/benchmark/Laminar2.pdf}
+    \caption{Iterations}
+\end{subfigure}
+\begin{subfigure}{0.49\textwidth}
+    \centering
+    \includegraphics<2->[width=1.0\textwidth]{/home/klas/Documents/PhD/Courses/OpenFOAM/Projects/3/Reports/lecture/../final/figures/benchmark/Laminar2_Time.pdf}
+    \caption{Elapsed time}
+    \label{fig:benchmark:Laminar:b}
+\end{subfigure}
+    \caption{Comparison of convergence for \OF{simpleFoam} and \OF{pUCoupledFoam}. Laminar case.}
+    \label{fig:benchmark:Laminar}
+\end{figure}
+}
+\end{frame}
+
+\begin{frame}%[allowframebreaks]
+\setbeamercovered{transparent}
+\begin{itemize}
+    \item Convergence profile (turbulent case):
+\end{itemize}
+\begin{figure}[h]
+\centering
+\begin{subfigure}{0.49\textwidth}
+    \centering
+    \includegraphics[width=1.0\textwidth]{/home/klas/Documents/PhD/Courses/OpenFOAM/Projects/3/Reports/lecture/../final/figures/benchmark/Turbulent2.pdf}
+    \caption{Iterations}
+\end{subfigure}
+\begin{subfigure}{0.49\textwidth}
+    \centering
+    \includegraphics[width=1.0\textwidth]{/home/klas/Documents/PhD/Courses/OpenFOAM/Projects/3/Reports/lecture/../final/figures/benchmark/Turbulent2_Time.pdf}
+    \caption{Elapsed time}
+\end{subfigure}
+    \caption{Comparison of convergence for \OF{simpleFoam} and \OF{pUCoupledFoam}. Turbulent case.}
+    \label{fig:benchmark:turbulent}
+\end{figure}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Summary and future outlook}
+\begin{frame}%[allowframebreaks]
+\setbeamercovered{transparent}
+\frametitle{Summary and future outlook}
+\textbf{Summary}:
+\begin{itemize}
+    \item Great possibilities
+    \item Successful parallelized multiphysics simulations of nuclear reactor cores
+    \item Faster convergence for incompressible flow simulations
+\end{itemize}
+\pause
+\vskip10pt
+\textbf{Future developments}:
+\begin{itemize}
+    \item Multi-grid methods for region and block coupling?
+    \item Combining region and block coupling?
+    \item .... 
+\end{itemize}
+\pause
+\vskip10pt
+\textbf{Community needs}:
+\begin{itemize}
+    \item Documentation 
+    \item Examples (e.g. parallelization of region coupling)
+    \item Tutorials
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+
+{\Huge Thank you! Questions?}
+\vfill
+{\bf Contact information:}\\
+Klas Jareteg\\
+klas.jareteg@chalmers.se\\
+\url{http://klas.nephy.chalmers.se}
+\end{frame}
+
+\end{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
