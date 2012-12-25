@@ -86,7 +86,7 @@ and
 \begin{frame}{The electroviscous effect}
 
 \begin{equation}
-\J = -  \sigma \nabla \phi  
+\J = -  \sigma_c \nabla \phi  
 \end{equation}
 
 \begin{equation}
@@ -105,7 +105,7 @@ Streaming potential
 \begin{frame}{Electroosmosis}
 
 \begin{equation}
-\F = \rhorm_e \E_{ext}
+\F = \rhorm_e \E
 \end{equation}
 
 \begin{figure}
@@ -120,10 +120,10 @@ Streaming potential
 Boundary conditions at (charged) walls, $\Gamma$
 
 \begin{itemize*}
-\item Poisson's equation: fixed surface charge, $\sigma$
+\item Poisson's equation: fixed surface charge, $\sigma_s$
 \begin{equation}\label{eq:et:fix_c}
 \nabla\psirm(\x) \cdot \n =
--\frac{\sigma(\x)}{\epsilon_0\epsilon_r}\;,\;\; \x \in \Gamma
+-\frac{\sigma_s(\x)}{\epsilon_0\epsilon_r}\;,\;\; \x \in \Gamma
 \end{equation}
 
 \item Nernst-Planck: zero flux through wall
