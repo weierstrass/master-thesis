@@ -46,8 +46,8 @@ will be used in this work, the velocities $\ci$ are given by
 To be able to retrieve the desired equations in the macroscopic limit
 of the LBE, the lattice used must possess a certain degree of
 isotropy. Thus the choice of lattice is not arbitrary. For instance,
-for obtaining the Navier-Stokes equations, the lattice must at least
-posses the following properties:
+for obtaining the Navier-Stokes equations, the lattice velocities must
+at least posses the following properties:
 
 \begin{subequations}\label{eq:lbm:i0}\label{eq:lbm:i1}\label{eq:lbm:i2}\label{eq:lbm:i3}\label{eq:lbm:i4}
 \begin{align}
