@@ -7,16 +7,17 @@ present. This information is also connected to the source code which
 gives easy access for the developer to correct eventual performance
 issues.
 
-A popular profiler used on UNIX systems is \texttt{gprof}. In this
-work, it is used to determine which routines that most contribute to
-the total execution time. It is in those routines that a code
-optimisation is most profitable. In order to be able to profile with
-\texttt{gprof}, the code must be compiled with additional compiler
-flags (\texttt{-pg} with \texttt{gcc}). This profilable program will
-run slower than a program compiled without profiling flags, it is thus
-important to not forget to compile the ``finished'' code without
-profiling flags. Below is an example of some output given by
-\texttt{gprof} when profiling the Navier-Stokes LBM implementation:
+A popular profiler used on UNIX systems is \texttt{gprof}
+\cite{gprof}. In this work, it is used to determine which routines
+that most contribute to the total execution time. It is in those
+routines that a code optimisation is most profitable. In order to be
+able to profile with \texttt{gprof}, the code must be compiled with
+additional compiler flags (\texttt{-pg} with \texttt{gcc}). This
+profilable program will run slower than a program compiled without
+profiling flags, it is thus important to not forget to compile the
+``finished'' code without profiling flags. Below is an example of some
+output given by \texttt{gprof} when profiling the Navier-Stokes LBM
+implementation:
 
 \begin{verbatim}
   %   cumulative   self                         
@@ -28,9 +29,59 @@ profiling flags. Below is an example of some output given by
  ...
 \end{verbatim}
 for brevity, only the output of most time consuming routines are
-shown. 
-%extra time
+shown. These four routines stands together for about 90$\;$\% of the
+total execution time. The main part of this time is for computing the
+equilibrium distribution which includes computing the zeroth and first
+moments of the distribution function. The reason why the first moment
+is four times as time consuming as the zeroth moment, is that the
+implementation is for a general lattice using the lattice vectors
+instead of just hardcoding it for the D2Q9 lattice which would have
+given a computation two times as time consuming as the zeroth moment.
+This is an example of when less general approach may give a
+performance boost on the cost of, in this case, to have to define
+separate routines for each lattice rather than having one general
+routine.
 
 \subsection{Memory specific profiling}
+Even though \texttt{gprof} is a good tool in many profiling
+situations, there may be cases where more low level information such
+as cache misses or certain instruction counts are desired. Fortunately
+there exist other more specialised tools to deal with these
+situations. One popular set of tools for memory profiling/debugging is
+\texttt{valgrind} \cite{valgrind}. Basically it works by simulating a
+virtual CPU and e.g. memory accesses and cache misses are counted as a
+program is run on this virtual CPU. In this work the
+\texttt{cachegrind} tool of \texttt{valgrind} is used to count cache
+misses, here is an example output for the Navier-Stokes
+implementation:
 
-valgrind
+\begin{verbatim} 
+ I   refs:      33,986,419,147
+ I1  misses:             1,828
+ LLi misses:             1,771
+ I1  miss rate:           0.00%
+ LLi miss rate:           0.00%
+ 
+ D   refs:      17,284,324,380  (12,564,330,224 rd   + 4,719,994,156 wr)
+ D1  misses:       364,260,481  (   354,685,981 rd   +     9,574,500 wr)
+ LLd misses:       175,534,108  (   165,973,036 rd   +     9,561,072 wr)
+ D1  miss rate:            2.1% (           2.8%     +           0.2%  )
+ LLd miss rate:            1.0% (           1.3%     +           0.2%  )
+ 
+ LL refs:          364,262,309  (   354,687,809 rd   +     9,574,500 wr)
+ LL misses:        175,535,879  (   165,974,807 rd   +     9,561,072 wr)
+ LL miss rate:             0.3% (           0.3%     +           0.2%  )
+\end{verbatim}
+where \texttt{I}, \texttt{D} and \texttt{LL} is the instruction, L1
+and last level (L3 in this particular case) caches respectively. The
+grid is chosen large enough to keep the size of the $f$ array much
+larger ($\sim$ 300 MiB) than the 8 MiB L3 cache. We see that about 1\%
+of the data memory lookups result in cache misses. A more thorough
+investigation using \texttt{cg\_annotate} of in what routines the
+cache misses arise, gives that about two thirds are in the streaming
+step and about one third in the collision step. This behaviour is in
+accordance with the memory model chosen, see section
+\ref{sec:hpc:loc_lbm}.
+
+\nomenclature{LL}{Last level (cache)}
+\nomenclature{UNIX}{A computer operating system}

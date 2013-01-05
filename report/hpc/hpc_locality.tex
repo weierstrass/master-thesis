@@ -40,7 +40,7 @@ the principle of locality is not considered.
 
 %\todo{example}
 
-\subsection{Locality and the LBM}
+\subsection{Locality and the LBM}\label{sec:hpc:loc_lbm}
 In an implementation of the lattice-Boltzmann method, the main
 quantity that is used in computation is the distribution
 function $\fii$. It is in the implementation realised as an array of
@@ -85,7 +85,6 @@ better with respect to locality for the ``worst'' part of the
 algorithm and is therefore chosen. Tests performed on a laptop with
 an Intel Core 2 Duo processor also shows that model A in general gives
 better locality.
-
 
 \nomenclature{L1, L2, L3}{Level 1,2,3 (cache)}
 \nomenclature{RAM}{Random Access Memory}
