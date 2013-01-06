@@ -44,7 +44,7 @@ the principle of locality is not considered.
 In an implementation of the lattice-Boltzmann method, the main
 quantity that is used in computation is the distribution
 function $\fii$. It is in the implementation realised as an array of
-dimension $\nx \times \ny \times Q$ where $Q$ is the number of
+dimension $\nx \times \ny \times \QQ$ where $\QQ$ is the number of
 directions in the discretised velocity space. Basically, two models
 for arranging $\fii$ in memory exist:
 
@@ -74,7 +74,7 @@ streaming is done from one array to the other and nothing is
 overwritten. This requires however twice as much memory and it has not
 been tested in the implementation done in this work.
 
-$Q$ is typically much smaller than the number of nodes $\nx \times
+$\QQ$ is typically much smaller than the number of nodes $\nx \times
 \ny$. This gives that when a cache line is fetched for model A, same
 directions from neighbouring nodes will also be fetched into the cache
 and a cache miss will not occur for each node update in the

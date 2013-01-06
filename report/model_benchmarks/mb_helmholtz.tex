@@ -32,13 +32,13 @@ setting $\delta_x = 1/(n_x-1) = 1/64$ and $\delta_t = \delta_x^2$. An
 other possibility would have been to rescale the parameter $\lambda$
 and have $\delta_x = \delta_t = 1$.
 
+% described in section \ref{sec:lbm:hezou} - RM for now 
 The boundary conditions in eq. \eqref{eq:mb:helm_bdry} was implemented
-using the He/Zou approach described in section \ref{sec:lbm:hezou}. A
-bounce back approach with some momentum addition would also have been
-possible but was not chosen due to that the actual boundary location
-is then not at the node location, but half a node-node distance into the
-computational domain. Also the bounce-back implementation is
-previously tested. 
+using the He/Zou approach. A bounce back approach with some momentum
+addition would also have been possible but was not chosen due to that
+the actual boundary location is then not at the node location, but
+half a node-node distance into the computational domain. Also the
+bounce-back implementation is previously tested.
 
 In fig. \ref{fig:mb:h1}, the obtained solution is presented together
 with the absolute error in fig. \ref{fig:mb:h2}. The agreement is

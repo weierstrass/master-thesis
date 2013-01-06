@@ -4,13 +4,13 @@ Parallel computing has, during the last decade, become a major topic
 not only in high-performance computing but in other fields of
 computing as well. As it gets tougher and tougher to squeeze in more
 circuits in a CPU, the idea of having several CPUs (or CPU cores) is
-today not only utilised in super computer but in most modern user
+today not only utilised in super computers but in most modern user
 workstations as well.
 
 There are mainly two different hardware setups that has to be
 distinguished between in parallel computing. Either the memory is
-shared between all or distributed locally at all processing units
-(PUs). The former is often referred to as shared memory and the latter
+shared between all or distributed locally at each processing unit
+(PU). The former is often referred to as shared memory and the latter
 to a distributed memory computer. An example of a shared memory
 computer would be a workstation having two CPU cores sharing the same
 RAM. A system using distributed memory could for instance be a super
@@ -31,13 +31,13 @@ shared memory computers OpenMP \cite{openmp} is an API that allows for
 a rather effortless way of parallelising a code.
 
 An algorithm may in a varying degree be suited for parallelising. If
-there is a lot of data dependence and dependencies in general. It may
+there is a lot of data dependence or dependencies in general. It may
 be difficult to divide the computation in independent tasks on
 different PUs. In the case with the algorithm in lattice-Boltzmann,
 the algorithm is very well suited for parallelisation. This is often
 considered a great strength of the lattice-Boltzmann method. The
 main part of the computation is done in the collision step, and a
-collision on a node may computed independently of data from other
+collision on a node is computed independently of data from other
 nodes. In parallelisation of the streaming step however, communication
 between nodes are needed. The win in performing the streaming step in
 parallel is much smaller than for the collision step. By this reason

@@ -28,6 +28,10 @@
 		\nompageref{12}
   \item [{LGA}]\begingroup Lattice Gas Automata/Automaton\nomeqref {3.0}
 		\nompageref{13}
+  \item [{LL}]\begingroup Last level (cache)\nomeqref {4.0}
+		\nompageref{42}
+  \item [{MLUPS}]\begingroup Million Lattice Updates Per Second\nomeqref {4.0}
+		\nompageref{39}
   \item [{MPI}]\begingroup Message Passing Interface\nomeqref {4.0}
 		\nompageref{38}
   \item [{NP, N-P}]\begingroup Nernst-Planck equation\nomeqref {2.0}
@@ -45,5 +49,7 @@
 		\nompageref{35}
   \item [{STP}]\begingroup Standard Temperature and Pressure\nomeqref {3.0}
 		\nompageref{13}
+  \item [{UNIX}]\begingroup A computer operating system\nomeqref {4.0}
+		\nompageref{42}
 
 \end{thenomenclature}
