@@ -11,7 +11,7 @@
 %% DON'T FORGET: Change PDF metadata in settings.tex !!
 %%
 %%%%%
-\documentclass[11pt,a4paper]{report}
+\documentclass[11pt,a4paper,twoside,openright]{report}
 
 % Packages and commands file
 \input{include/packagescommands}
@@ -38,7 +38,8 @@
 %List of figures
 \listoffigures
 
-%List of abbreviations
+%List of abbreviations    
+\renewcommand*{\nompreamble}{\markboth{\uppercase{\nomname}}{\uppercase{\nomname}}}
 \printnomenclature
 
 % Main area

@@ -14,7 +14,7 @@ routines that a code optimisation is most profitable. In order to be
 able to profile with \texttt{gprof}, the code must be compiled with
 additional compiler flags (\texttt{-pg} with \texttt{gcc}). This
 profilable program will run slower than a program compiled without
-profiling flags, it is thus important to not forget to compile the
+profiling flags, it is thus important to not to forget to compile the
 ``finished'' code without profiling flags. Below is an example of some
 output given by \texttt{gprof} when profiling the Navier-Stokes LBM
 implementation:
@@ -26,9 +26,8 @@ implementation:
  30.54      2.81     1.20 40000000  BGKNS::fEq(double, double*, double*)
  10.69      3.23     0.42 40000000  BGKNS::get0moment(int, int)
  10.18      3.63     0.40     1000  StreamD2Q9::stream()
- ...
 \end{verbatim}
-for brevity, only the output of most time consuming routines are
+for brevity, only the output of the most time consuming routines are
 shown. These four routines stands together for about 90$\;$\% of the
 total execution time. The main part of this time is for computing the
 equilibrium distribution which includes computing the zeroth and first

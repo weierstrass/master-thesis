@@ -10,8 +10,8 @@ workstations as well.
 There are mainly two different hardware setups that has to be
 distinguished between in parallel computing. Either the memory is
 shared between all or distributed locally at each processing unit
-(PU). The former is often referred to as shared memory and the latter
-to a distributed memory computer. An example of a shared memory
+(PU). The former is often referred to as a shared memory and the
+latter to a distributed memory computer. An example of a shared memory
 computer would be a workstation having two CPU cores sharing the same
 RAM. A system using distributed memory could for instance be a super
 computing cluster where several computers (nodes) are connected in a
@@ -23,12 +23,12 @@ memory computers, common address spaces may be used for communication
 and for distributed, messages are passed over the network. As a
 programmer there is a major difference in how this is done. Since this
 is a common task, there exist software for simplifying the
-parallelistation of a code. In distributed computing an interface is
-defined for how the communication over the network may be done, this
-interface is called MPI (Message Passing Interface). There are several
-implementations of MPI, one example is Open MPI \cite{openmpi}. For
-shared memory computers OpenMP \cite{openmp} is an API that allows for
-a rather effortless way of parallelising a code.
+parallelistation of a code. In distributed parallel computing an
+interface is defined for how the communication over the network may be
+done, this interface is called MPI (Message Passing Interface). There
+are several implementations of MPI, one example is Open MPI
+\cite{openmpi}. For shared memory computers OpenMP \cite{openmp} is an
+API that allows for a rather effortless way of parallelising a code.
 
 An algorithm may in a varying degree be suited for parallelising. If
 there is a lot of data dependence or dependencies in general. It may

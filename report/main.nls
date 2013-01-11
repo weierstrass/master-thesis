@@ -3,37 +3,37 @@
  \nomgroup{A}
 
   \item [{API}]\begingroup Application Programming Interface\nomeqref {4.0}
-		\nompageref{38}
+		\nompageref{39}
   \item [{BGK}]\begingroup Relaxation type collision operator (Bhatnagar,   Gross and Krook)\nomeqref {3.10}
-		\nompageref{17}
+		\nompageref{18}
   \item [{CE, C-E}]\begingroup Chapman-Enskog\nomeqref {3.25}
-		\nompageref{21}
+		\nompageref{22}
   \item [{CFD}]\begingroup Computational Fluid Dynamics\nomeqref {3.0}
-		\nompageref{13}
+		\nompageref{14}
   \item [{CISC}]\begingroup Complex Instruction Set Computing\nomeqref {4.0}
-		\nompageref{35}
+		\nompageref{36}
   \item [{CPU}]\begingroup Central Processing Unit\nomeqref {4.0}
-		\nompageref{35}
+		\nompageref{36}
   \item [{D2Q9}]\begingroup 2D lattice with 9 discrete velocities\nomeqref {3.14}
-		\nompageref{19}
+		\nompageref{20}
   \item [{EDL}]\begingroup Electrical   Double Layer\nomeqref {2.0}
 		\nompageref{3}
   \item [{HDD}]\begingroup Hard Disk Drive\nomeqref {4.0}
-		\nompageref{37}
-  \item [{L1, L2, L3}]\begingroup Level 1,2,3 (cache)\nomeqref {4.0}
-		\nompageref{37}
-  \item [{LBE}]\begingroup Lattice-Boltzmann Equation\nomeqref {3.8}
-		\nompageref{16}
-  \item [{LBM}]\begingroup Lattice-Boltzmann Method\nomeqref {3.0}
-		\nompageref{12}
-  \item [{LGA}]\begingroup Lattice Gas Automata/Automaton\nomeqref {3.0}
-		\nompageref{13}
-  \item [{LL}]\begingroup Last level (cache)\nomeqref {4.0}
-		\nompageref{42}
-  \item [{MLUPS}]\begingroup Million Lattice Updates Per Second\nomeqref {4.0}
-		\nompageref{39}
-  \item [{MPI}]\begingroup Message Passing Interface\nomeqref {4.0}
 		\nompageref{38}
+  \item [{L1, L2, L3}]\begingroup Level 1,2,3 (cache)\nomeqref {4.0}
+		\nompageref{38}
+  \item [{LBE}]\begingroup Lattice-Boltzmann Equation\nomeqref {3.8}
+		\nompageref{17}
+  \item [{LBM}]\begingroup Lattice-Boltzmann Method\nomeqref {3.0}
+		\nompageref{13}
+  \item [{LGA}]\begingroup Lattice Gas Automata/Automaton\nomeqref {3.0}
+		\nompageref{14}
+  \item [{LL}]\begingroup Last level (cache)\nomeqref {4.0}
+		\nompageref{43}
+  \item [{MLUPS}]\begingroup Million Lattice Updates Per Second\nomeqref {4.0}
+		\nompageref{40}
+  \item [{MPI}]\begingroup Message Passing Interface\nomeqref {4.0}
+		\nompageref{39}
   \item [{NP, N-P}]\begingroup Nernst-Planck equation\nomeqref {2.0}
 		\nompageref{4}
   \item [{NS, N-S}]\begingroup Navier-Stokes equations\nomeqref {2.0}
@@ -42,14 +42,14 @@
 		\nompageref{8}
   \item [{PE, P-E}]\begingroup Poisson's equation of electrostatics\nomeqref {2.0}
 		\nompageref{4}
-  \item [{PU}]\begingroup Processing Unit\nomeqref {4.0}\nompageref{35}
+  \item [{PU}]\begingroup Processing Unit\nomeqref {4.0}\nompageref{36}
   \item [{RAM}]\begingroup Random Access Memory\nomeqref {4.0}
-		\nompageref{37}
+		\nompageref{38}
   \item [{RISC}]\begingroup Reduced Instruction Set Computing\nomeqref {4.0}
-		\nompageref{35}
+		\nompageref{36}
   \item [{STP}]\begingroup Standard Temperature and Pressure\nomeqref {3.0}
-		\nompageref{13}
+		\nompageref{14}
   \item [{UNIX}]\begingroup A computer operating system\nomeqref {4.0}
-		\nompageref{42}
+		\nompageref{43}
 
 \end{thenomenclature}
