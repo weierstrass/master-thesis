@@ -49,13 +49,14 @@ of the more complicated systems modelled in this work was found and it
 is therefore difficult to determine a qualitative and quantitative
 correctness. Experimental results for this kind of system is very
 difficult to obtain, the detailed measurement of a velocity
-field in a system is not simple to determine. 
+field in a system is not simple to determine. This is also the main
+reason why a computational approach is so much desired.
 
 To get an efficient implementation of the method, topics from
 high-performance computing must be considered. The distribution
 function must be organised in memory to allow for good locality in the
 computation. Also unnecessary branches and data dependence should be
-avoid in the innermost loop. It is important to use a modern and
+avoided in the innermost loop. It is important to use a modern and
 uptodate compiler and it may be a good idea to tell the compiler to
 optimise the code as much as possible. The LBM algorithm is also very
 well suited for parallelisation. This is due to that there is no data
