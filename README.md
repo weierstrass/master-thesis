@@ -3,6 +3,8 @@ Master's thesis I did in 2012 at the Department of Mathematical Sciences at Chal
 
 The published report can be found here: http://publications.lib.chalmers.se/records/fulltext/170015/170015.pdf
 
+The presentation for the disputation ceremony can be found here: https://github.com/weierstrass/master-thesis/raw/master/report/pres/pres.pdf
+
 The C++ code that was developed for the thesis can be found here: https://github.com/weierstrass/wlb
 
 ##Abstract
